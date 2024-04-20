@@ -26,10 +26,16 @@
             "tsConfig": "projects/poc/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              {
+                "glob": "*",
+                "input": "projects/common/src/assets",
+                "output": "assets"
+              },
               "projects/poc/src/favicon.ico",
               "projects/poc/src/assets"
             ],
             "styles": [
+              "projects/common/src/styles.scss",
               "projects/poc/src/styles.scss"
             ],
             "scripts": [],
@@ -134,10 +140,16 @@
             "tsConfig": "projects/accounts/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              {
+                "glob": "*",
+                "input": "projects/common/src/assets",
+                "output": "assets"
+              },
               "projects/accounts/src/favicon.ico",
               "projects/accounts/src/assets"
             ],
             "styles": [
+              "projects/common/src/styles.scss",
               "projects/accounts/src/styles.scss"
             ],
             "scripts": []
@@ -225,27 +237,6 @@
       "sourceRoot": "projects/common/src",
       "prefix": "com",
       "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:application",
-          "options": {
-            "outputPath": "dist/common",
-            "index": "projects/common/src/index.html",
-            "browser": "projects/common/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
-            "tsConfig": "projects/common/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "projects/common/src/favicon.ico",
-              "projects/common/src/assets"
-            ],
-            "styles": [
-              "projects/common/src/styles.scss"
-            ],
-            "scripts": []
-          }
-        },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
