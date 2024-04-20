@@ -165,7 +165,7 @@
       },
       "root": "projects/myaccount",
       "sourceRoot": "projects/myaccount/src",
-      "prefix": "acc",
+      "prefix": "my-acc",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",

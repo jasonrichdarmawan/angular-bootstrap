@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'acc-home',
+  selector: 'my-acc-home',
   standalone: true,
   imports: [],
   templateUrl: './home.page.html',

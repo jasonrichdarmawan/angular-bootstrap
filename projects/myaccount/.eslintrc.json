@@ -13,7 +13,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "acc",
+            "prefix": "my-acc",
             "style": "camelCase"
           }
         ],
@@ -21,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "acc",
+            "prefix": "my-acc",
             "style": "kebab-case"
           }
         ]
