@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import("./presentation/pages/acc/acc.page").then(p => p.AccPage),
+    loadComponent: () => import("./presentation/pages/my-acc/my-acc.page").then(p => p.MyAccPage),
     children: [
       {
         path: '',
@@ -24,4 +24,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AccRoutingModule { }
+export class MyAccRoutingModule { }
