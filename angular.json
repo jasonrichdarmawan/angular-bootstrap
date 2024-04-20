@@ -12,7 +12,7 @@
       },
       "root": "projects/poc",
       "sourceRoot": "projects/poc/src",
-      "prefix": "app",
+      "prefix": "poc",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
