@@ -99,6 +99,15 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/poc/**/*.ts",
+              "projects/poc/**/*.html"
+            ]
+          }
         }
       }
     },
@@ -192,6 +201,15 @@
               "projects/accounts/src/styles.scss"
             ],
             "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/accounts/**/*.ts",
+              "projects/accounts/**/*.html"
+            ]
           }
         }
       }
