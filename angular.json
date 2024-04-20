@@ -95,7 +95,8 @@
               "buildTarget": "poc:build:production"
             },
             "development": {
-              "buildTarget": "poc:build:development"
+              "buildTarget": "poc:build:development",
+              "port": 4199
             }
           },
           "defaultConfiguration": "development"
@@ -223,7 +224,8 @@
               "buildTarget": "myaccount:build:production"
             },
             "development": {
-              "buildTarget": "myaccount:build:development"
+              "buildTarget": "myaccount:build:development",
+              "port": 4200
             }
           },
           "defaultConfiguration": "development"
