@@ -7,7 +7,26 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
         }
       },
       "root": "projects/poc",
@@ -26,10 +45,16 @@
             "tsConfig": "projects/poc/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              {
+                "glob": "*",
+                "input": "projects/common/src/assets",
+                "output": "assets"
+              },
               "projects/poc/src/favicon.ico",
               "projects/poc/src/assets"
             ],
             "styles": [
+              "projects/common/src/styles.scss",
               "projects/poc/src/styles.scss"
             ],
             "scripts": [],
@@ -115,7 +140,26 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
         }
       },
       "root": "projects/accounts",
@@ -134,10 +178,16 @@
             "tsConfig": "projects/accounts/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              {
+                "glob": "*",
+                "input": "projects/common/src/assets",
+                "output": "assets"
+              },
               "projects/accounts/src/favicon.ico",
               "projects/accounts/src/assets"
             ],
             "styles": [
+              "projects/common/src/styles.scss",
               "projects/accounts/src/styles.scss"
             ],
             "scripts": []
@@ -209,6 +259,66 @@
             "lintFilePatterns": [
               "projects/accounts/**/*.ts",
               "projects/accounts/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "common": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        }
+      },
+      "root": "projects/common",
+      "sourceRoot": "projects/common/src",
+      "prefix": "com",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/common/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/common/src/favicon.ico",
+              "projects/common/src/assets"
+            ],
+            "styles": [
+              "projects/common/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/common/**/*.ts",
+              "projects/common/**/*.html"
             ]
           }
         }
