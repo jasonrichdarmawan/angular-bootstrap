@@ -388,7 +388,8 @@
               "buildTarget": "accounts:build:production"
             },
             "development": {
-              "buildTarget": "accounts:build:development"
+              "buildTarget": "accounts:build:development",
+              "port": 4201
             }
           },
           "defaultConfiguration": "development"
