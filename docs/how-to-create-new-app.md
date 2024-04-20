@@ -3,17 +3,28 @@
 Run these commands:
 
 1. create the app.
-```
-// npx ng new app < app-name > --prefix < app-name >
-$ npx ng new app poc --prefix poc
-```
+   ```
+   // npx ng new app < app-name > --prefix < app-name >
+   $ npx ng new app poc --prefix poc
+   ```
 
 2. add linter to the app.
-```
-// npx ng g @angular-eslint/schematics:add-eslint-to-project < app-name >
-$ npx ng g @angular-eslint/schematics:add-eslint-to-project poc
-```
+   ```
+   // npx ng g @angular-eslint/schematics:add-eslint-to-project < app-name >
+   $ npx ng g @angular-eslint/schematics:add-eslint-to-project poc
+   ```
 
 3. if it's SSR and will be deployed to Firebase Hosting.
 
-go to line 47 in `projects/poc/server.ts`. Then, remove the process.env['PORT'].
+   go to line 47 in `projects/poc/server.ts`. Then, remove the process.env['PORT'].
+
+4. set the port for `npx ng serve < app-name >` in the `angular.json` file
+   ``` 
+        "serve": {
+          "configurations": {
+            "development": {
+              "port": 4200
+            }
+          }
+        }
+   ```
