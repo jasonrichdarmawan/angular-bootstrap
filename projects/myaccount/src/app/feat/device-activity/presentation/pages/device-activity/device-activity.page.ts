@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './device-activity.page.html',
-  styleUrl: './device-activity.page.scss'
+  styleUrl: './device-activity.page.scss',
 })
-export class DeviceActivityPage {
-
-}
+export class DeviceActivityPage {}

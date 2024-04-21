@@ -1,4 +1,3 @@
 describe('AppComponent', () => {
-  it('@todo', () => {
-  });
+  it('@todo', () => {});
 });

@@ -39,9 +39,7 @@
             "outputPath": "dist/poc",
             "index": "projects/poc/src/index.html",
             "browser": "projects/poc/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/poc/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -110,19 +108,14 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/poc/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/poc/src/favicon.ico",
               "projects/poc/src/assets"
             ],
-            "styles": [
-              "projects/poc/src/styles.scss"
-            ],
+            "styles": ["projects/poc/src/styles.scss"],
             "scripts": []
           }
         },
@@ -173,9 +166,7 @@
             "outputPath": "dist/myaccount",
             "index": "projects/myaccount/src/index.html",
             "browser": "projects/myaccount/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/myaccount/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -239,19 +230,14 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/myaccount/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/myaccount/src/favicon.ico",
               "projects/myaccount/src/assets"
             ],
-            "styles": [
-              "projects/myaccount/src/styles.scss"
-            ],
+            "styles": ["projects/myaccount/src/styles.scss"],
             "scripts": []
           }
         },
@@ -299,19 +285,14 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/common/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/common/src/favicon.ico",
               "projects/common/src/assets"
             ],
-            "styles": [
-              "projects/common/src/styles.scss"
-            ],
+            "styles": ["projects/common/src/styles.scss"],
             "scripts": []
           }
         },
@@ -330,7 +311,26 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
         }
       },
       "root": "projects/accounts",
@@ -343,18 +343,14 @@
             "outputPath": "dist/accounts",
             "index": "projects/accounts/src/index.html",
             "browser": "projects/accounts/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/accounts/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/accounts/src/favicon.ico",
               "projects/accounts/src/assets"
             ],
-            "styles": [
-              "projects/accounts/src/styles.scss"
-            ],
+            "styles": ["projects/accounts/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -403,19 +399,14 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/accounts/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/accounts/src/favicon.ico",
               "projects/accounts/src/assets"
             ],
-            "styles": [
-              "projects/accounts/src/styles.scss"
-            ],
+            "styles": ["projects/accounts/src/styles.scss"],
             "scripts": []
           }
         },
