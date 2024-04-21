@@ -14,11 +14,7 @@ Run these commands:
    $ npx ng g @angular-eslint/schematics:add-eslint-to-project poc
    ```
 
-3. if it's SSR and will be deployed to Firebase Hosting.
-
-   go to line 47 in `projects/poc/server.ts`. Then, remove the process.env['PORT'].
-
-4. set the port for `npx ng serve < app-name >` in the `angular.json` file
+3. set the port for `npx ng serve < app-name >` in the `angular.json` file
    ``` 
         "serve": {
           "configurations": {
@@ -28,3 +24,36 @@ Run these commands:
           }
         }
    ```
+
+4. set `skipTests` to true
+
+   So you don't accidentally create test file when you don't actually want to.
+
+   ```
+        "@schematics/angular:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        }
+   ```
+
+5. if it's SSR and will be deployed to Firebase Hosting.
+
+   go to line 47 in `projects/poc/server.ts`. Then, remove the process.env['PORT'].

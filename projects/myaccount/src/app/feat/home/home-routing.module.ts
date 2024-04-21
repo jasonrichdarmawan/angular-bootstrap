@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import("./presentation/pages/my-acc/my-acc.page").then(p => p.MyAccPage),
+    loadComponent: () => import("./presentation/layout/home/home.layout").then(p => p.HomeLayout),
     children: [
       {
         path: '',
@@ -12,10 +12,9 @@ const routes: Routes = [
         loadComponent: () => import("./presentation/pages/home/home.page").then(p => p.HomePage)
       },
       {
-        path: 'device-activity',
-        pathMatch: 'full',
-        loadComponent: () => import("./presentation/pages/device-activity/device-activity.page").then(p => p.DeviceActivityPage)
-      }
+        path: 'security',
+        loadComponent: () => import("./presentation/pages/security/security.page").then(p => p.SecurityPage),
+      },
     ]
   }
 ];

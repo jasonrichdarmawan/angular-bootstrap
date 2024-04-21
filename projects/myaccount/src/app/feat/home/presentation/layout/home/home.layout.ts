@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'my-acc-my-acc-page',
+  selector: 'my-acc-home',
   standalone: true,
   imports: [RouterOutlet, RouterLink],
-  templateUrl: './my-acc.page.html',
-  styleUrl: './my-acc.page.scss'
+  templateUrl: './home.layout.html',
+  styleUrl: './home.layout.scss'
 })
-export class MyAccPage {
+export class HomeLayout {
 
 }
