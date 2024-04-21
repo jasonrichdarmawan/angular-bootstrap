@@ -7,4 +7,5 @@ An example of how to share session between domain and subdomain. For example,
 
 # Table of contents
 
+- [Onboarding](./docs/onboarding.md)
 - [How to create new app](./docs/how-to-create-new-app.md)
