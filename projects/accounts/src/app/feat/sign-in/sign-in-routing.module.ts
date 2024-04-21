@@ -9,11 +9,13 @@ const routes: Routes = [
   },
   {
     path: 'identifier',
-    loadComponent: () => import("./presentation/pages/identifier/identifier.page").then(p => p.IdentifierPage)
+    loadComponent: () =>
+      import('./presentation/pages/identifier/identifier.page').then(
+        (p) => p.IdentifierPage,
+      ),
   },
   {
     path: 'challenge',
-    loadComponent: () => import("./presentation/pages/challenge/challenge.page").then(p => p.ChallengePage),
     children: [
       {
         path: '',
@@ -22,14 +24,17 @@ const routes: Routes = [
       },
       {
         path: 'pwd',
-        loadComponent: () => import("./presentation/pages/challenge-pwd/challenge-pwd.page").then(p => p.ChallengePwdPage)
-      }
-    ]
-  }
+        loadComponent: () =>
+          import('./presentation/pages/challenge-pwd/challenge-pwd.page').then(
+            (p) => p.ChallengePwdPage,
+          ),
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class SignInRoutingModule { }
+export class SignInRoutingModule {}

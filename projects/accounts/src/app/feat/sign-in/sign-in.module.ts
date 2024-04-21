@@ -3,12 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { SignInRoutingModule } from './sign-in-routing.module';
 
-
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    SignInRoutingModule
-  ]
+  imports: [CommonModule, SignInRoutingModule],
 })
-export class SignInModule { }
+export class SignInModule {}

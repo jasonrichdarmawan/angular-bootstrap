@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './birthday-gender.page.html',
-  styleUrl: './birthday-gender.page.scss'
+  styleUrl: './birthday-gender.page.scss',
 })
-export class BirthdayGenderPage {
-
-}
+export class BirthdayGenderPage {}

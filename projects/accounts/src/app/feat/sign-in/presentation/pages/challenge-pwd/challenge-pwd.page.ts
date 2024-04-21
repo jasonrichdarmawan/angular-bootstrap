@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './challenge-pwd.page.html',
-  styleUrl: './challenge-pwd.page.scss'
+  styleUrl: './challenge-pwd.page.scss',
 })
-export class ChallengePwdPage {
-
-}
+export class ChallengePwdPage {}

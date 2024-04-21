@@ -3,12 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { SignUpRoutingModule } from './sign-up-routing.module';
 
-
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    SignUpRoutingModule
-  ]
+  imports: [CommonModule, SignUpRoutingModule],
 })
-export class SignUpModule { }
+export class SignUpModule {}

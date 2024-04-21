@@ -3,19 +3,22 @@
 Run these commands:
 
 1. create the app.
+
    ```
    // npx ng new app < app-name > --prefix < app-name >
    $ npx ng new app poc --prefix poc
    ```
 
 2. add linter to the app.
+
    ```
    // npx ng g @angular-eslint/schematics:add-eslint-to-project < app-name >
    $ npx ng g @angular-eslint/schematics:add-eslint-to-project poc
    ```
 
 3. set the port for `npx ng serve < app-name >` in the `angular.json` file
-   ``` 
+
+   ```
         "serve": {
           "configurations": {
             "development": {

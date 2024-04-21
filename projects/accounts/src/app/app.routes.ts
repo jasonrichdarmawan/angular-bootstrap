@@ -8,10 +8,12 @@ export const routes: Routes = [
   },
   {
     path: 'sign-in',
-    loadChildren: () => import("./feat/sign-in/sign-in.module").then(m => m.SignInModule)
+    loadChildren: () =>
+      import('./feat/sign-in/sign-in.module').then((m) => m.SignInModule),
   },
   {
     path: 'sign-up',
-    loadChildren: () => import("./feat/sign-up/sign-up.module").then(m => m.SignUpModule)
-  }
+    loadChildren: () =>
+      import('./feat/sign-up/sign-up.module').then((m) => m.SignUpModule),
+  },
 ];

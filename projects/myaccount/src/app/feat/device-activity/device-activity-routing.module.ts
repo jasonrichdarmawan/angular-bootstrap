@@ -4,12 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import("./presentation/pages/device-activity/device-activity.page").then(p => p.DeviceActivityPage)
-  }
+    loadComponent: () =>
+      import('./presentation/pages/device-activity/device-activity.page').then(
+        (p) => p.DeviceActivityPage,
+      ),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class DeviceActivityRoutingModule { }
+export class DeviceActivityRoutingModule {}

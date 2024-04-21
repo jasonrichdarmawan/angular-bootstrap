@@ -6,8 +6,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet, RouterLink],
   templateUrl: './home.layout.html',
-  styleUrl: './home.layout.scss'
+  styleUrl: './home.layout.scss',
 })
-export class HomeLayout {
-
-}
+export class HomeLayout {}
