@@ -10,26 +10,14 @@ const routes: Routes = [
   {
     path: 'identifier',
     loadComponent: () =>
-      import('./presentation/pages/identifier/identifier.page').then(
-        (p) => p.IdentifierPage,
+      import('./sign-in-identifier/sign-in-identifier.page').then(
+        (p) => p.SignInIdentifierPage,
       ),
   },
   {
     path: 'challenge',
-    children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'pwd',
-      },
-      {
-        path: 'pwd',
-        loadComponent: () =>
-          import('./presentation/pages/challenge-pwd/challenge-pwd.page').then(
-            (p) => p.ChallengePwdPage,
-          ),
-      },
-    ],
+    loadChildren: () =>
+      import('./challenge/challenge.module').then((m) => m.ChallengeModule),
   },
 ];
 
