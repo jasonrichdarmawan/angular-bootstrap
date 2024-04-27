@@ -28,7 +28,7 @@ Run these commands:
         }
    ```
 
-4. set `skipTests` to true
+4. set `skipTests` to true in the `angular.json` file
 
    So you don't accidentally create test file when you don't actually want to.
 
@@ -57,6 +57,12 @@ Run these commands:
         }
    ```
 
-5. if it's SSR and will be deployed to Firebase Hosting.
+5. add `common` styles to the application in the `angular.json` file
+
+   ```
+   assets: ["projects/common/src/styles.scss"]
+   ```
+
+6. if it's SSR and will be deployed to Firebase Hosting.
 
    go to line 47 in `projects/poc/server.ts`. Then, remove the process.env['PORT'].
