@@ -1,0 +1,18 @@
+<div class="overlay" [class.overlay-show]="showOverlay"></div>
+
+<div class="main">
+  <img class="logo" src="/assets/google-logo.svg" alt="google logo" />
+  <div class="section">
+    <div class="left-content">
+      <span class="com-headline-5">{{ title }}</span>
+      <span class="com-headline-6">{{ description }}</span>
+    </div>
+    <div class="right-content">
+      <ng-content select="[right-content-input]" />
+
+      <div class="actions">
+        <ng-content select="[right-content-action]" />
+      </div>
+    </div>
+  </div>
+</div>

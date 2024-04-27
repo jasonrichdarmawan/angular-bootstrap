@@ -1,0 +1,25 @@
+button {
+  // Layout
+  display: inline-flex;
+  padding: 16px 24px;
+
+  // Style
+  border-radius: 16px;
+  border: none;
+  background: #0957D0;
+
+  // Typography
+  color: #FFF;
+
+  &:not(:disabled) {
+    &:hover {
+      // Style
+      cursor: pointer;
+      background: #154AA8;
+    }
+
+    &:active {
+      background: #19428E;
+    }
+  }
+}

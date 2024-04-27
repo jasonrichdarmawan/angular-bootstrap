@@ -1,0 +1,88 @@
+:host {
+  // Layout
+  display: flex;
+  padding: calc(216/1024 * 100vh) calc(216/1440 * 100vw);
+  gap: 16px;
+
+  // fix: without setting the height, the background height is not 100% of the viewport
+  height: 100vh;
+  box-sizing: border-box;
+
+  // Style
+  background: #F0F4F8;
+}
+
+.overlay {
+  // Layout
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+
+  // Style
+  background-color: #fff;
+  opacity: 0.5;
+
+  &-show {
+    display: block;
+  }
+}
+
+.main {
+  // Layout
+  display: flex;
+  padding: calc(72/1024 * 100vh) calc(72/1440 * 100vw);
+  flex-direction: column;
+  gap: 32px;
+  flex: 1 0 0;
+  align-self: stretch;
+
+  // Style
+  border-radius: 72px;
+  background: #FFF;
+}
+
+.logo {
+  // Layout
+  width: 72px;
+  height: 72px;
+}
+
+.section {
+  // Layout
+  display: flex;
+  gap: 64px;
+  flex: 1 0 0;
+  align-self: stretch;
+}
+
+.left-content {
+  // Layout
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  flex: 1 0 0;
+  align-self: stretch;
+}
+
+.right-content {
+  // Layout
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 0 0;
+  align-self: stretch;
+}
+
+.actions {
+  // Layout
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  align-self: stretch;
+}
