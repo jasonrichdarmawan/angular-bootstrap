@@ -10,6 +10,15 @@
 
   // Style
   background: #F0F4F8;
+
+  @media screen and (max-width: 768px) {
+    // Layout
+    padding: 39px;
+    gap: 8px;
+
+    // Style
+    background: #FFF;
+  }
 }
 
 .overlay {
@@ -29,6 +38,7 @@
   opacity: 0.5;
 
   &-show {
+    // Layout
     display: block;
   }
 }
@@ -36,7 +46,7 @@
 .main {
   // Layout
   display: flex;
-  padding: calc(72/1024 * 100vh) calc(72/1440 * 100vw);
+  padding: 72px;
   flex-direction: column;
   gap: 32px;
   flex: 1 0 0;
@@ -45,6 +55,14 @@
   // Style
   border-radius: 72px;
   background: #FFF;
+
+  @media screen and (max-width: 768px) {
+    // Layout
+    padding: initial;
+
+    // Style
+    border-radius: initial;
+  }
 }
 
 .logo {
@@ -59,6 +77,12 @@
   gap: 64px;
   flex: 1 0 0;
   align-self: stretch;
+
+  @media screen and (max-width: 768px) {
+    // Layout
+    flex-direction: column;
+    gap: 39px;
+  }
 }
 
 .left-content {
@@ -68,6 +92,10 @@
   gap: 32px;
   flex: 1 0 0;
   align-self: stretch;
+
+  @media screen and (max-width: 768px) {
+    flex: initial;
+  }
 }
 
 .right-content {
@@ -85,4 +113,9 @@
   justify-content: flex-end;
   gap: 16px;
   align-self: stretch;
+  align-items: center;
+
+  @media screen and (max-width: 768px) {
+    justify-content: space-between;
+  }
 }

@@ -63,6 +63,8 @@ Run these commands:
    assets: ["projects/common/src/styles.scss"]
    ```
 
-6. if it's SSR and will be deployed to Firebase Hosting.
+6. add Angular Material to the application with `npx ng add @angular/material --project <app-name>`
+
+7. if it's SSR and will be deployed to Firebase Hosting.
 
    go to line 47 in `projects/poc/server.ts`. Then, remove the process.env['PORT'].
