@@ -19,8 +19,13 @@
   // fix: when input is focused, there was a extra line
   outline: none;
 
-  // fix: due to the border line-width
+  // fix: due to the border line-width (for desktop)
   margin: 1.5px;
+
+  @media screen and (max-width: 768px) {
+    // fix: due to the border line-width (for mobile)
+    margin: 1px;
+  }
 
   &:focus {
     // Style
