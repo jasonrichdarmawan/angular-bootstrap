@@ -200,10 +200,24 @@
               ],
               "outputHashing": "all"
             },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/common/src/environments/environment.ts",
+                  "with": "projects/common/src/environments/environment.staging.ts"
+                }
+              ]
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "projects/common/src/environments/environment.ts",
+                  "with": "projects/common/src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -213,6 +227,9 @@
           "configurations": {
             "production": {
               "buildTarget": "myaccount:build:production"
+            },
+            "staging": {
+              "buildTarget": "myaccount:build:staging"
             },
             "development": {
               "buildTarget": "myaccount:build:development",
@@ -373,10 +390,24 @@
               ],
               "outputHashing": "all"
             },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/common/src/environments/environment.ts",
+                  "with": "projects/common/src/environments/environment.staging.ts"
+                }
+              ]
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "projects/common/src/environments/environment.ts",
+                  "with": "projects/common/src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -386,6 +417,9 @@
           "configurations": {
             "production": {
               "buildTarget": "accounts:build:production"
+            },
+            "staging": {
+              "buildTarget": "accounts:build:staging"
             },
             "development": {
               "buildTarget": "accounts:build:development",
