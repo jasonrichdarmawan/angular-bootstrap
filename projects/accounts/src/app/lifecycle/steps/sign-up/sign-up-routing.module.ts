@@ -10,27 +10,27 @@ const routes: Routes = [
   {
     path: 'name',
     loadComponent: () =>
-      import('./presentation/pages/name/name.page').then((p) => p.NamePage),
+      import('./sign-up-name/sign-up-name.page').then((p) => p.SignUpNamePage),
   },
   {
-    path: 'birthday-gender',
+    path: 'birthdaygender',
     loadComponent: () =>
-      import('./presentation/pages/birthday-gender/birthday-gender.page').then(
-        (p) => p.BirthdayGenderPage,
+      import('./sign-up-birthday-gender/sign-up-birthday-gender.page').then(
+        (p) => p.SignUpBirthdayGenderPage,
       ),
   },
   {
     path: 'username',
     loadComponent: () =>
-      import('./presentation/pages/username/username.page').then(
-        (p) => p.UsernamePage,
+      import('./sign-up-username/sign-up-username.page').then(
+        (p) => p.SignUpUsernamePage,
       ),
   },
   {
     path: 'password',
     loadComponent: () =>
-      import('./presentation/pages/password/password.page').then(
-        (p) => p.PasswordPage,
+      import('./sign-up-password/sign-up-password.page').then(
+        (p) => p.SignUpPasswordPage,
       ),
   },
 ];

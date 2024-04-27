@@ -9,3 +9,8 @@
    2. `dbaeumer.vscode-eslint`
 
       to lint TypeScript files.
+
+2. Tools
+
+   1. [Figma Team](https://www.figma.com/files/project/226187199)
+   2. [ClickUp Space](https://app.clickup.com/9018253334/v/s/90180859710)

@@ -4,16 +4,20 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'sign-in',
+    redirectTo: 'v3',
   },
   {
-    path: 'sign-in',
-    loadChildren: () =>
-      import('./feat/sign-in/sign-in.module').then((m) => m.SignInModule),
+    path: 'v3',
+    loadChildren: () => import('./v3/v3.module').then((m) => m.V3Module),
   },
   {
-    path: 'sign-up',
+    path: 'lifecycle',
     loadChildren: () =>
-      import('./feat/sign-up/sign-up.module').then((m) => m.SignUpModule),
+      import('./lifecycle/lifecycle.module').then((m) => m.LifecycleModule),
+  },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('@common/not-found/not-found.page').then((p) => p.NotFoundPage),
   },
 ];
