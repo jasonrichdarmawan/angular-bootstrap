@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { IsEmailExistsMock } from '@common/data/datasources/is-email-exists-mock/is-email-exists.mock';
 import { IsEmailExistsRepository } from '@common/domain/repositories/is-email-exists/is-email-exists.repository';
 import { IsEmailExistsUseCase } from '@common/domain/usecases/is-email-exists/is-email-exists.use-case';
@@ -7,6 +7,8 @@ import { ButtonFlatComponent } from '@common/presentation/components/button-flat
 import { InputTextComponent } from '@common/presentation/components/input-text/input-text.component';
 import { lastValueFrom } from 'rxjs';
 import { AccountsLayout } from '../../../presentation/layouts/accounts/accounts.layout';
+import { AsyncPipe } from '@angular/common';
+import { IsFeatureEnabledUseCase } from '@common/domain/usecases/is-feature-enabled/is-feature-enabled.use-case';
 
 @Component({
   selector: 'acc-sign-in-identifier',
@@ -16,6 +18,7 @@ import { AccountsLayout } from '../../../presentation/layouts/accounts/accounts.
     InputTextComponent,
     ButtonBasicComponent,
     ButtonFlatComponent,
+    AsyncPipe,
   ],
   providers: [
     {
@@ -28,14 +31,32 @@ import { AccountsLayout } from '../../../presentation/layouts/accounts/accounts.
   templateUrl: './sign-in-identifier.page.html',
   styleUrl: './sign-in-identifier.page.scss',
 })
-export class SignInIdentifierPage implements AfterViewInit {
+export class SignInIdentifierPage implements OnInit, AfterViewInit {
   email: string = '';
   isLoading: boolean = false;
   errorMessage: string = '';
 
   @ViewChild('inputEmail') inputEmail!: InputTextComponent;
 
-  constructor(public isEmailExists: IsEmailExistsUseCase) {}
+  isCreateAccountEnabled: boolean = false;
+
+  constructor(
+    private isFeatureEnabled: IsFeatureEnabledUseCase,
+    private isEmailExists: IsEmailExistsUseCase,
+  ) {}
+
+  log() {
+    console.log('hello');
+  }
+
+  ngOnInit(): void {
+    this.isFeatureEnabled
+      .execute('lifecycle/steps/signup/name')
+      .then((response) => {
+        console.log('hello');
+        this.isCreateAccountEnabled = response;
+      });
+  }
 
   ngAfterViewInit(): void {
     this.inputEmail.focus();

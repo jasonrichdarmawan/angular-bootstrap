@@ -6,7 +6,7 @@ import { Observable, delay, of } from 'rxjs';
 @Injectable()
 export class IsEmailExistsMock implements IsEmailExistsRepository {
   execute(email: string): Observable<IsEmailExistsResponse> {
-    const hasEmail = this.data.has(email);
+    const hasEmail = this.remoteDatabase.has(email);
 
     if (!hasEmail) {
       return of<IsEmailExistsResponse>({
@@ -18,5 +18,5 @@ export class IsEmailExistsMock implements IsEmailExistsRepository {
     return of<IsEmailExistsResponse>({ ok: true }).pipe(delay(1000));
   }
 
-  private data: Set<string> = new Set(['a@gmail.com']);
+  private remoteDatabase: Set<string> = new Set(['a@gmail.com']);
 }

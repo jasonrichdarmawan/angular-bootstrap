@@ -11,9 +11,11 @@
     right-content-input
   />
 
-  <com-button-basic (buttonClick)="onCreateAccount()" right-content-action
-    >Create account</com-button-basic
-  >
+  @if (isCreateAccountEnabled) {
+    <com-button-basic (buttonClick)="onCreateAccount()" right-content-action
+      >Create account</com-button-basic
+    >
+  }
 
   <com-button-flat
     (buttonClick)="onNext()"
