@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 
+/**
+ * @todo support select="[left-content-action]"
+ */
 @Component({
   selector: 'acc-accounts',
   standalone: true,

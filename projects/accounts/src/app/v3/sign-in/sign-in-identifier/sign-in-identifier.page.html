@@ -17,10 +17,12 @@
     >
   }
 
-  <com-button-flat
-    (buttonClick)="onNext()"
-    [disabled]="isLoading"
-    right-content-action
-    >Next</com-button-flat
-  >
+  @if (isChallengePwdEnabled) {
+    <com-button-flat
+      (buttonClick)="onNext()"
+      [disabled]="isLoading"
+      right-content-action
+      >Next</com-button-flat
+    >
+  }
 </acc-accounts>

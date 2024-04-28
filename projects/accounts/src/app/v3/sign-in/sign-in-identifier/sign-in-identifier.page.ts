@@ -9,7 +9,11 @@ import { lastValueFrom } from 'rxjs';
 import { AccountsLayout } from '../../../presentation/layouts/accounts/accounts.layout';
 import { AsyncPipe } from '@angular/common';
 import { IsFeatureEnabledUseCase } from '@common/domain/usecases/is-feature-enabled/is-feature-enabled.use-case';
+import { ActivatedRoute, Router } from '@angular/router';
 
+/**
+ * @todo translation
+ */
 @Component({
   selector: 'acc-sign-in-identifier',
   standalone: true,
@@ -39,22 +43,25 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
   @ViewChild('inputEmail') inputEmail!: InputTextComponent;
 
   isCreateAccountEnabled: boolean = false;
+  isChallengePwdEnabled: boolean = false;
 
   constructor(
     private isFeatureEnabled: IsFeatureEnabledUseCase,
     private isEmailExists: IsEmailExistsUseCase,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
-
-  log() {
-    console.log('hello');
-  }
 
   ngOnInit(): void {
     this.isFeatureEnabled
-      .execute('lifecycle/steps/signup/name')
+      .execute('/lifecycle/steps/signup/name')
       .then((response) => {
-        console.log('hello');
         this.isCreateAccountEnabled = response;
+      });
+    this.isFeatureEnabled
+      .execute('/v3/signin/challenge/pwd')
+      .then((response) => {
+        this.isChallengePwdEnabled = response;
       });
   }
 
@@ -97,6 +104,6 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
       return;
     }
 
-    // @todo navigation if email exists
+    this.router.navigate(['../challenge/pwd'], { relativeTo: this.route });
   }
 }
