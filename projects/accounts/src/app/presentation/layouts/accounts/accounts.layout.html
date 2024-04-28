@@ -4,8 +4,14 @@
   <img class="logo" src="/assets/google-logo.svg" alt="google logo" />
   <div class="section">
     <div class="left-content">
-      <span class="com-headline-5">{{ title }}</span>
-      <span class="com-headline-6">{{ description }}</span>
+      @if (title) {
+        <span class="com-headline-5">{{ title }}</span>
+      }
+      @if (description) {
+        <span class="com-headline-6">{{ description }}</span>
+      }
+
+      <ng-content select="[left-content-action]" />
     </div>
     <div class="right-content">
       <ng-content select="[right-content-input]" />

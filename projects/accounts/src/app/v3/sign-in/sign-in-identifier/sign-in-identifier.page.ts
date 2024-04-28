@@ -104,6 +104,9 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
       return;
     }
 
-    this.router.navigate(['../challenge/pwd'], { relativeTo: this.route });
+    this.router.navigate(['../challenge/pwd'], {
+      relativeTo: this.route,
+      state: { email: this.email },
+    });
   }
 }

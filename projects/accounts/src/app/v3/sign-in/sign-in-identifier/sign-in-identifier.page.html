@@ -12,17 +12,19 @@
   />
 
   @if (isCreateAccountEnabled) {
-    <com-button-basic (buttonClick)="onCreateAccount()" right-content-action
-      >Create account</com-button-basic
-    >
+    <button com-basic (click)="onCreateAccount()" right-content-action>
+      <span class="com-button">Create account</span>
+    </button>
   }
 
   @if (isChallengePwdEnabled) {
-    <com-button-flat
-      (buttonClick)="onNext()"
+    <button
+      com-flat
+      (click)="onNext()"
       [disabled]="isLoading"
       right-content-action
-      >Next</com-button-flat
     >
+      <span class="com-button">Next</span>
+    </button>
   }
 </acc-accounts>
