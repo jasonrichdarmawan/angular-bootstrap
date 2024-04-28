@@ -9,15 +9,17 @@ import { IsFeatureEnabledRepository } from '@common/domain/repositories/is-featu
 @Injectable()
 export class IsFeatureEnabledMock implements IsFeatureEnabledRepository {
   private mutex: Mutex = new Mutex();
+  private localCache?: Map<string, IsFeatureEnabledData>;
 
   async execute(feature: string): Promise<IsFeatureEnabledResponse> {
     return this.mutex.runExclusive(async () => {
       // fetch
       if (!this.localCache) {
+        // simulate fetch
         await new Promise<void>((resolve) =>
           setTimeout(() => {
             resolve();
-          }, 1000),
+          }, 100),
         );
         const response = this.remoteDatabase;
         this.localCache = response;
@@ -51,11 +53,13 @@ export class IsFeatureEnabledMock implements IsFeatureEnabledRepository {
     });
   }
 
-  private localCache?: Map<string, IsFeatureEnabledData>;
-
   private remoteDatabase: Map<string, IsFeatureEnabledData> = new Map([
     [
-      'lifecycle/steps/signup/name',
+      '/lifecycle/steps/signup/name',
+      { development: true, staging: false, production: false },
+    ],
+    [
+      '/v3/signin/challenge/pwd',
       { development: true, staging: false, production: false },
     ],
   ]);
