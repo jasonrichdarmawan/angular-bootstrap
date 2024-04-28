@@ -1,0 +1,12 @@
+.left-content-action {
+  // Layout
+  display: flex;
+  padding-right: calc(88/1440 * 100vw);
+  flex-direction: column;
+  align-self: stretch;
+
+  @media screen and (max-width: 768px) {
+    // Layout
+    padding-right: initial;
+  }
+}
