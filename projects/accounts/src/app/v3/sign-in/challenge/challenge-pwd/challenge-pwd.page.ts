@@ -6,6 +6,9 @@ import { MatIcon } from '@angular/material/icon';
 import { InputTextComponent } from '@common/presentation/components/input-text/input-text.component';
 import { ButtonOutlineIconComponent } from '@common/presentation/components/button-outline-icon/button-outline-icon.component';
 
+/**
+ * @todo show error if email is empty
+ */
 @Component({
   selector: 'acc-challenge-pwd',
   standalone: true,
