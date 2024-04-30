@@ -11,7 +11,7 @@ import { Component, ElementRef, HostBinding, Input } from '@angular/core';
 export class InputComponent implements ElementRef<HTMLInputElement> {
   nativeElement: HTMLInputElement;
 
-  @HostBinding('class.error') @Input() errorMessage: string = '';
+  @HostBinding('class.error') @Input() isError: boolean = false;
 
   constructor(elementRef: ElementRef) {
     this.nativeElement = elementRef.nativeElement;
