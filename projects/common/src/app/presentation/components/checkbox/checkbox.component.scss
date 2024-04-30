@@ -1,0 +1,28 @@
+:host {
+  // Layout
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+button {
+  // Layout
+  display: flex;
+  padding: 0.25rem;
+
+  // Style
+  border: none;
+  border-radius: 0.75rem;
+  background: none;
+  cursor: pointer;
+
+  &:hover {
+    // Style
+    background: #F7F8FE;
+  }
+
+  &:active {
+    // Style
+    background: #D0DBF5;
+  }
+}

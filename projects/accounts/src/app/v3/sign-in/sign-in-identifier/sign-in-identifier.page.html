@@ -3,16 +3,23 @@
   description="Use your Google Account"
   [showOverlay]="isLoading"
 >
-  <com-input-text
-    #inputEmail
-    placeholder="Email"
-    [(value)]="email"
-    [errorMessage]="errorMessage"
-    right-content-input
-  />
+  <div right-content-input class="input">
+    <input
+      com-input
+      #inputEmail
+      autocomplete="email"
+      [errorMessage]="errorMessage"
+      (input)="email = inputEmail.nativeElement.value"
+      placeholder="Email"
+      type="email"
+    />
+    @if (errorMessage) {
+      <com-error>{{ errorMessage }}</com-error>
+    }
+  </div>
 
   @if (isCreateAccountEnabled) {
-    <button com-basic (click)="onCreateAccount()" right-content-action>
+    <button com-basic right-content-action (click)="onCreateAccount()">
       <span class="com-button">Create account</span>
     </button>
   }
@@ -20,9 +27,9 @@
   @if (isChallengePwdEnabled) {
     <button
       com-flat
+      right-content-action
       (click)="onNext()"
       [disabled]="isLoading"
-      right-content-action
     >
       <span class="com-button">Next</span>
     </button>

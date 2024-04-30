@@ -8,7 +8,7 @@ h6 {
   margin: 0;
 }
 
-.com-headline-1 {
+@mixin com-headline-1 {
   // Typography
   font-family: Roboto;
   font-size: 96px;
@@ -18,7 +18,11 @@ h6 {
   letter-spacing: -1.5px;
 }
 
-.com-headline-2 {
+.com-headline-1 {
+  @include com-headline-1;
+}
+
+@mixin com-headline-2 {
   // Typography
   font-family: Roboto;
   font-size: 60px;
@@ -28,7 +32,11 @@ h6 {
   letter-spacing: -0.5px;
 }
 
-.com-headline-3 {
+.com-headline-2 {
+  @include com-headline-2;
+}
+
+@mixin com-headline-3 {
   /* headline-3 */
   font-family: Roboto;
   font-size: 48px;
@@ -37,7 +45,11 @@ h6 {
   line-height: normal;
 }
 
-.com-headline-4 {
+.com-headline-3 {
+  @include com-headline-3;
+}
+
+@mixin com-headline-4 {
   // Typography
   font-family: Roboto;
   font-size: 34px;
@@ -47,7 +59,11 @@ h6 {
   letter-spacing: 0.25px;
 }
 
-.com-headline-5 {
+.com-headline-4 {
+  @include com-headline-4;
+}
+
+@mixin com-headline-5 {
   // Typography
   font-family: Roboto;
   font-size: 24px;
@@ -56,7 +72,11 @@ h6 {
   line-height: normal;
 }
 
-.com-headline-6 {
+.com-headline-5 {
+  @include com-headline-5;
+}
+
+@mixin com-headline-6 {
   // Typography
   font-family: Roboto;
   font-size: 20px;
@@ -66,7 +86,11 @@ h6 {
   letter-spacing: 0.15px;
 }
 
-.com-subtitle-1 {
+.com-headline-6 {
+  @include com-headline-6;
+}
+
+@mixin com-subtitle-1 {
   // Typography
   font-family: Roboto;
   font-size: 16px;
@@ -76,7 +100,11 @@ h6 {
   letter-spacing: 0.15px;
 }
 
-.com-subtitle-2 {
+.com-subtitle-1 {
+  @include com-subtitle-1;
+}
+
+@mixin com-subtitle-2 {
   // Typography
   font-family: Roboto;
   font-size: 14px;
@@ -86,7 +114,11 @@ h6 {
   letter-spacing: 0.1px;
 }
 
-.com-body-1 {
+.com-subtitle-2 {
+  @include com-subtitle-2;
+}
+
+@mixin com-body-1 {
   // Typography
   font-family: Roboto;
   font-size: 16px;
@@ -96,7 +128,11 @@ h6 {
   letter-spacing: 0.5px;
 }
 
-.com-body-2 {
+.com-body-1 {
+  @include com-body-1;
+}
+
+@mixin com-body-2 {
   // Typography
   font-family: Roboto;
   font-size: 14px;
@@ -106,7 +142,11 @@ h6 {
   letter-spacing: 0.25px;
 }
 
-.com-button {
+.com-body-2 {
+  @include com-body-2;
+}
+
+@mixin com-button {
   // Typography
   font-family: Roboto;
   font-size: 14px;
@@ -117,17 +157,25 @@ h6 {
   text-transform: uppercase;
 }
 
-.com-caption {
+.com-button {
+  @include com-button;
+}
+
+@mixin com-caption {
   // Typography
   font-family: Roboto;
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  letter-spacing: 0.25px;
+  letter-spacing: 0.4px;
 }
 
-.com-overline {
+.com-caption {
+  @include com-caption;
+}
+
+@mixin com-overline {
   // Typography
   font-family: Roboto;
   font-size: 10px;
@@ -136,4 +184,8 @@ h6 {
   line-height: normal;
   letter-spacing: 1.5px;
   text-transform: uppercase;
+}
+
+.com-overline {
+  @include com-overline;
 }

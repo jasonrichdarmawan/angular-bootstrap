@@ -93,15 +93,9 @@
   flex: 1 0 0;
   align-self: stretch;
 
-  // fix: force the content not to give in width to the other content.
-  width: 50%;
-
   @media screen and (max-width: 768px) {
     // Layout
     flex: initial;
-
-    // fix: force the content not to give in width to the other content.
-    width: initial;
   }
 }
 
@@ -112,15 +106,6 @@
   justify-content: space-between;
   flex: 1 0 0;
   align-self: stretch;
-
-  // fix: force the content not to give in width to the other content.
-  width: 50%;
-
-  @media screen and (max-width: 768px) {
-    // Layout
-    // fix: force the content not to give in width to the other content.
-    width: initial;
-  }
 }
 
 .actions {

@@ -4,12 +4,13 @@ import { IsEmailExistsRepository } from '@common/domain/repositories/is-email-ex
 import { IsEmailExistsUseCase } from '@common/domain/usecases/is-email-exists/is-email-exists.use-case';
 import { ButtonBasicComponent } from '@common/presentation/components/button-basic/button-basic.component';
 import { ButtonFlatComponent } from '@common/presentation/components/button-flat/button-flat.component';
-import { InputTextComponent } from '@common/presentation/components/input-text/input-text.component';
+import { InputComponent } from '@common/presentation/components/input/input.component';
 import { lastValueFrom } from 'rxjs';
 import { AccountsLayout } from '../../../presentation/layouts/accounts/accounts.layout';
 import { AsyncPipe } from '@angular/common';
 import { IsFeatureEnabledUseCase } from '@common/domain/usecases/is-feature-enabled/is-feature-enabled.use-case';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ErrorComponent } from '@common/presentation/components/error/error.component';
 
 /**
  * @todo translation
@@ -19,7 +20,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   standalone: true,
   imports: [
     AccountsLayout,
-    InputTextComponent,
+    InputComponent,
+    ErrorComponent,
     ButtonBasicComponent,
     ButtonFlatComponent,
     AsyncPipe,
@@ -36,14 +38,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './sign-in-identifier.page.scss',
 })
 export class SignInIdentifierPage implements OnInit, AfterViewInit {
-  email: string = '';
-  isLoading: boolean = false;
-  errorMessage: string = '';
-
-  @ViewChild('inputEmail') inputEmail!: InputTextComponent;
-
-  isCreateAccountEnabled: boolean = false;
   isChallengePwdEnabled: boolean = false;
+  isCreateAccountEnabled: boolean = false;
+
+  email: string = '';
+  errorMessage: string = '';
+  isLoading: boolean = false;
+
+  @ViewChild('inputEmail') inputEmail!: InputComponent;
 
   constructor(
     private isFeatureEnabled: IsFeatureEnabledUseCase,
@@ -66,7 +68,7 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.inputEmail.focus();
+    this.inputEmail.nativeElement.focus();
   }
 
   async onCreateAccount() {
@@ -81,7 +83,7 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
 
     if (!this.email) {
       this.errorMessage = 'Enter an email';
-      this.inputEmail.focus();
+      this.inputEmail.nativeElement.focus();
       return;
     }
 
@@ -100,7 +102,7 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
           this.errorMessage = 'Unexpected error';
           break;
       }
-      this.inputEmail.focus();
+      this.inputEmail.nativeElement.focus();
       return;
     }
 

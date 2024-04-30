@@ -1,0 +1,4 @@
+<button (click)="isCheckedChange.emit(!isChecked)">
+  <mat-icon [fontIcon]="isChecked ? 'check_box' : 'check_box_outline_blank'" />
+</button>
+<span class="com-body-1">{{ label }}</span>
