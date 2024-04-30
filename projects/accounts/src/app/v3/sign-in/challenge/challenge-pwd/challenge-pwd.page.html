@@ -1,16 +1,39 @@
 <acc-accounts title="Welcome">
-  <div class="left-content-action" left-content-action>
-    <button com-outline-icon class="stretch" [label]="email">
-      <mat-icon fontIcon="account_circle" left-icon />
-      <mat-icon fontIcon="arrow_drop_down" right-icon />
+  <div left-content-action class="left-content-action">
+    <button
+      com-outline-icon
+      class="stretch"
+      (click)="onEmail()"
+      [label]="email"
+    >
+      <mat-icon left-icon fontIcon="account_circle" />
+      <mat-icon right-icon fontIcon="arrow_drop_down" />
     </button>
   </div>
 
-  <com-input-text
-    #inputPassword
-    placeholder="Enter your password"
-    [(value)]="password"
-    [errorMessage]="errorMessage"
+  <input
+    autocomplete="email"
+    style="display: none"
+    type="email"
+    [value]="email"
     right-content-input
   />
+
+  <div right-content-input class="password">
+    <div class="input">
+      <input
+        com-input
+        #inputPassword
+        autocomplete="current-password"
+        [errorMessage]="errorMessage"
+        (input)="password = inputPassword.nativeElement.value"
+        placeholder="Enter your password"
+        [type]="showPassword ? 'text' : 'password'"
+      />
+      @if (errorMessage) {
+        <com-error>{{ errorMessage }}</com-error>
+      }
+    </div>
+    <com-checkbox label="Show Password" [(isChecked)]="showPassword" />
+  </div>
 </acc-accounts>

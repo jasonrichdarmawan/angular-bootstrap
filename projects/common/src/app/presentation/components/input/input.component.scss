@@ -1,13 +1,6 @@
 :host {
   // Layout
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.input {
-  // Layout
-  display: flex;
   padding: 16px;
   align-self: stretch;
 
@@ -34,22 +27,17 @@
     // fix: due to the border line-width
     margin: 0px;
   }
-
-  &-error {
-    // Style
-    border: 1px solid #BC5C5A;
-
-    &:focus {
-      // Style
-      border: 2px solid #BC5C5A;
-
-      // fix: due to the border line-width
-      margin: 0px;
-    }
-  }
 }
 
-.error {
-  // Typography
-  color: #BC5C5A;
+:host(.error) {
+  // Style
+  border: 1px solid #BC5C5A;
+
+  &:focus {
+    // Style
+    border: 2px solid #BC5C5A;
+
+    // fix: due to the border line-width
+    margin: 0px;
+  }
 }

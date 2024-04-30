@@ -1,0 +1,8 @@
+@import "../../../../styles/typography.scss";
+
+:host {
+  @include com-caption;
+
+  // Typography
+  color: #BC5C5A;
+}
