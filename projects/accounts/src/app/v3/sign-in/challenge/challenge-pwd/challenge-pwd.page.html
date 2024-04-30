@@ -17,8 +17,8 @@
         com-input
         #inputPassword
         autocomplete="current-password"
-        [errorMessage]="errorMessage"
         (input)="password = inputPassword.nativeElement.value"
+        [isError]="errorMessage ? true : false"
         placeholder="Enter your password"
         [type]="showPassword ? 'text' : 'password'"
       />

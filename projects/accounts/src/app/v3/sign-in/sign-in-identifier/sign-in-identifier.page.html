@@ -8,8 +8,8 @@
       com-input
       #inputEmail
       autocomplete="username"
-      [errorMessage]="errorMessage"
       (input)="email = inputEmail.nativeElement.value"
+      [isError]="errorMessage ? true : false"
       placeholder="Email"
       type="email"
     />
