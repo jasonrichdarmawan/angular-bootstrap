@@ -1,4 +1,4 @@
-<acc-accounts title="Welcome">
+<acc-accounts title="Welcome" [showOverlay]="isLoading">
   <div left-content-action class="left-content-action">
     <button
       com-outline-icon
@@ -11,16 +11,18 @@
     </button>
   </div>
 
-  <div right-content-input class="password">
-    <div class="input">
+  <div right-content-input class="password-container">
+    <div class="input-container">
       <input
         com-input
         #inputPassword
         autocomplete="current-password"
+        class="eye-icon-none"
         (input)="password = inputPassword.nativeElement.value"
         [isError]="errorMessage ? true : false"
         placeholder="Enter your password"
         [type]="showPassword ? 'text' : 'password'"
+        [value]="password"
       />
       @if (errorMessage) {
         <com-error>{{ errorMessage }}</com-error>
@@ -28,4 +30,16 @@
     </div>
     <com-checkbox label="Show Password" [(isChecked)]="showPassword" />
   </div>
+
+  @if (isOnTryAnotherWayEnabled) {
+    <button com-basic right-content-action>
+      <span class="com-button">Try another way</span>
+    </button>
+  }
+
+  @if (isOnNextEnabled) {
+    <button com-flat right-content-action (click)="onNext()">
+      <span class="com-button">Next</span>
+    </button>
+  }
 </acc-accounts>

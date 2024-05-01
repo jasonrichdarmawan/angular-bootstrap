@@ -1,5 +1,5 @@
 import { Location, NgTemplateOutlet } from '@angular/common';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AccountsLayout } from 'projects/accounts/src/app/presentation/layouts/accounts/accounts.layout';
 import { MatIcon } from '@angular/material/icon';
@@ -7,6 +7,13 @@ import { InputComponent } from '@common/presentation/components/input/input.comp
 import { ButtonOutlineIconComponent } from '@common/presentation/components/button-outline-icon/button-outline-icon.component';
 import { CheckboxComponent } from '@common/presentation/components/checkbox/checkbox.component';
 import { ErrorComponent } from '@common/presentation/components/error/error.component';
+import { IsFeatureEnabledUseCase } from '@common/domain/usecases/is-feature-enabled/is-feature-enabled.use-case';
+import { ButtonFlatComponent } from '@common/presentation/components/button-flat/button-flat.component';
+import { ButtonBasicComponent } from '@common/presentation/components/button-basic/button-basic.component';
+import { SignInWithEmailAndPasswordUseCase } from '@common/domain/usecases/sign-in-with-email-and-password/sign-in-with-email-and-password.use-case';
+import { SignInWithEmailAndPasswordRepository } from '@common/domain/repositories/sign-in-with-email-and-password/sign-in-with-email-and-password.repository';
+import { SignInWithEmailAndPasswordMock } from '@common/data/datasources/sign-in-with-email-and-password-mock/sign-in-with-email-and-password.mock';
+import { lastValueFrom } from 'rxjs';
 
 /**
  * @todo show error if email is empty
@@ -23,30 +30,100 @@ import { ErrorComponent } from '@common/presentation/components/error/error.comp
     ErrorComponent,
     CheckboxComponent,
     RouterLink,
+    ButtonBasicComponent,
+    ButtonFlatComponent,
+  ],
+  providers: [
+    {
+      provide: SignInWithEmailAndPasswordRepository,
+      useClass: SignInWithEmailAndPasswordMock,
+    },
+    SignInWithEmailAndPasswordUseCase,
   ],
   templateUrl: './challenge-pwd.page.html',
   styleUrl: './challenge-pwd.page.scss',
 })
-export class ChallengePwdPage {
+export class ChallengePwdPage implements OnInit, AfterViewInit {
   readonly email: string = '';
 
   errorMessage: string = '';
+  isLoading: boolean = false;
+  isOnNextEnabled: boolean = false;
+  isOnTryAnotherWayEnabled: boolean = false;
   password: string = '';
   showPassword: boolean = false;
+
+  @ViewChild('inputPassword') inputPassword!: InputComponent;
 
   constructor(
     private router: Router,
     private location: Location,
+    private isFeatureEnabled: IsFeatureEnabledUseCase,
+    private signIn: SignInWithEmailAndPasswordUseCase,
   ) {
     const email = this.router.getCurrentNavigation()?.extras?.state?.['email'];
-    if (email) {
-      this.email = email;
+    if (!email) {
+      this.location.back();
+      return;
     }
+    this.email = email;
+  }
+
+  ngOnInit(): void {
+    this.isFeatureEnabled
+      .execute('/v3/signin/challenge/pwd#onTryAnotherWay')
+      .then((response) => (this.isOnTryAnotherWayEnabled = response));
+    this.isFeatureEnabled
+      .execute('/v3/signin/challenge/pwd#onNext')
+      .then((response) => (this.isOnNextEnabled = response));
+  }
+
+  ngAfterViewInit(): void {
+    this.inputPassword.nativeElement.focus();
   }
 
   async onEmail() {
     this.location.back();
   }
 
-  async onNext() {}
+  async onNext() {
+    this.errorMessage = '';
+
+    if (!this.password) {
+      this.errorMessage = 'Enter a password';
+      this.password = '';
+      this.inputPassword.nativeElement.focus();
+      return;
+    }
+
+    this.isLoading = true;
+    const response = await lastValueFrom(
+      this.signIn.execute(this.email, this.password),
+    );
+    this.isLoading = false;
+    if (!response.ok) {
+      switch (response.errorCode) {
+        case 'email-not-found':
+          console.warn(
+            `${ChallengePwdPage.name} was not expected to be activated without email`,
+          );
+          this.errorMessage = 'Unexpected error';
+          this.password = '';
+          break;
+        case 'wrong-password':
+          this.errorMessage = 'Wrong Password. Try again';
+          this.password = '';
+          break;
+        default:
+          console.warn(
+            `${ChallengePwdPage.name} error code: ${response.errorCode}`,
+          );
+          this.errorMessage = 'Unexpected error';
+          this.password = '';
+          break;
+      }
+      this.inputPassword.nativeElement.focus();
+      return;
+    }
+  }
 }

@@ -99,6 +99,9 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
           this.errorMessage = "Couldn't find your Google Account";
           break;
         default:
+          console.warn(
+            `${SignInIdentifierPage.name} error code: ${response.errorCode}`,
+          );
           this.errorMessage = 'Unexpected error';
           break;
       }

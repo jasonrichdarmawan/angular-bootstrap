@@ -16,12 +16,13 @@ export class IsFeatureEnabledMock implements IsFeatureEnabledRepository {
       // fetch
       if (!this.localCache) {
         // simulate fetch
-        await new Promise<void>((resolve) =>
-          setTimeout(() => {
-            resolve();
-          }, 100),
+        const response = await new Promise<Map<string, IsFeatureEnabledData>>(
+          (resolve) => {
+            setTimeout(() => {
+              resolve(this.remoteDatabase);
+            }, 100);
+          },
         );
-        const response = this.remoteDatabase;
         this.localCache = response;
 
         const hasKey = response.has(feature);
@@ -60,6 +61,14 @@ export class IsFeatureEnabledMock implements IsFeatureEnabledRepository {
     ],
     [
       '/v3/signin/challenge/pwd',
+      { development: true, staging: false, production: false },
+    ],
+    [
+      '/v3/signin/challenge/pwd#onTryAnotherWay',
+      { development: false, staging: false, production: false },
+    ],
+    [
+      '/v3/signin/challenge/pwd#onNext',
       { development: true, staging: false, production: false },
     ],
   ]);
