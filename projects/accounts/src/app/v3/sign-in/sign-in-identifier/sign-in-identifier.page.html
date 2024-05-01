@@ -9,7 +9,7 @@
       #inputEmail
       autocomplete="username"
       (input)="email = inputEmail.nativeElement.value"
-      value="a"
+      [value]="email"
       [isError]="errorMessage ? true : false"
       placeholder="Email"
       type="email"
