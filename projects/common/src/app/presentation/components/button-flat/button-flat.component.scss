@@ -6,20 +6,21 @@
   // Style
   border-radius: 16px;
   border: none;
-  background: #0957D0;
+  background: #0957d0;
 
   // Typography
-  color: #FFF;
+  color: #fff;
+  text-decoration: none;
 
   &:not(:disabled) {
     &:hover {
       // Style
       cursor: pointer;
-      background: #154AA8;
+      background: #154aa8;
     }
 
     &:active {
-      background: #19428E;
+      background: #19428e;
     }
   }
 }

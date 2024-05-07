@@ -1,15 +1,12 @@
 import { KeyValue, KeyValuePipe } from '@angular/common';
-import {
-  Component,
-  HostListener,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { HOST_LANGUAGE_PARAMETER_CONSTANT } from '@common/presentation/constants/host-language-parameter/host-language-parameter.constant';
+import { LANGUAGES_CONSTANT } from '../../constants/languages/languages.constant';
+import { DEFAULT_LANGUAGE_CONSTANT } from '../../constants/default_language/language-default.constant';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * @todo change language
@@ -21,25 +18,38 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './language.component.html',
   styleUrl: './language.component.scss',
 })
-export class LanguageComponent implements OnInit, OnDestroy {
-  readonly languages: Record<string, string> = {
-    'en-US': 'English (United States) ',
-    id: 'Indonesia',
-  };
+export class LanguageComponent {
+  languages = LANGUAGES_CONSTANT;
 
-  onDestroy$: Subject<void> = new Subject<void>();
-
-  selectedLanguage: KeyValue<string, string> = {
-    key: 'en-US',
-    value: 'English (United States)',
-  };
+  selectedLanguage: KeyValue<string, string> = (() => {
+    const language = LANGUAGES_CONSTANT[DEFAULT_LANGUAGE_CONSTANT];
+    return { key: DEFAULT_LANGUAGE_CONSTANT, value: language };
+  })();
 
   @ViewChild('trigger') trigger!: MatMenuTrigger;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-  ) {}
+  ) {
+    this.route.queryParamMap
+      .pipe(takeUntilDestroyed())
+      .subscribe((queryParamMap) => {
+        const hostLanguage = queryParamMap.get(
+          HOST_LANGUAGE_PARAMETER_CONSTANT,
+        );
+        if (!hostLanguage) {
+          return;
+        }
+
+        const language = LANGUAGES_CONSTANT[hostLanguage];
+        if (!language) {
+          return;
+        }
+
+        this.selectedLanguage = { key: hostLanguage, value: language };
+      });
+  }
 
   @HostListener('click', ['$event'])
   private onClick(event: MouseEvent) {
@@ -53,36 +63,13 @@ export class LanguageComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit(): void {
-    this.route.queryParamMap
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe((queryParamMap) => {
-        const hostLanguage = queryParamMap.get('hl');
-        if (!hostLanguage) {
-          return;
-        }
-
-        const language = this.languages[hostLanguage];
-        if (!language) {
-          return;
-        }
-
-        this.selectedLanguage = { key: hostLanguage, value: language };
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.onDestroy$.next();
-    this.onDestroy$.complete();
-  }
-
   onSelectLanguage(event: MouseEvent, language: KeyValue<string, string>) {
     event.stopPropagation();
     this.selectedLanguage = language;
     this.trigger.closeMenu();
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { hl: language.key },
+      queryParams: { [HOST_LANGUAGE_PARAMETER_CONSTANT]: language.key },
       queryParamsHandling: 'merge',
     });
   }

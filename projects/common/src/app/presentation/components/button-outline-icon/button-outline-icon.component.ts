@@ -2,7 +2,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'button[com-outline-icon]',
+  selector: 'button[com-outline-icon], a[com-outline-icon]',
   standalone: true,
   imports: [],
   templateUrl: './button-outline-icon.component.html',

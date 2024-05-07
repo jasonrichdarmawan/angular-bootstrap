@@ -8,19 +8,20 @@
   background: none;
 
   // Typography
-  color: #0957D0;
+  color: #0957d0;
+  text-decoration: none;
 
   &:not(:disabled) {
     &:hover {
       // Style
       cursor: pointer;
       border-radius: 16px;
-      background: #F7F8FE;
+      background: #f7f8fe;
     }
 
     &:active {
       border-radius: 16px;
-      background: #CCD8F5;
+      background: #ccd8f5;
     }
   }
 }

@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'button[com-basic]',
+  selector: 'button[com-basic], a[com-basic]',
   standalone: true,
   imports: [],
   templateUrl: './button-basic.component.html',

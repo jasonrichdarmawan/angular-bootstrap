@@ -1,15 +1,24 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { IsEmailExistsMock } from '@common/data/datasources/is-email-exists-mock/is-email-exists.mock';
 import { IsEmailExistsUseCase } from '@common/domain/usecases/is-email-exists/is-email-exists.use-case';
 import { ButtonBasicComponent } from '@common/presentation/components/button-basic/button-basic.component';
 import { ButtonFlatComponent } from '@common/presentation/components/button-flat/button-flat.component';
 import { InputComponent } from '@common/presentation/components/input/input.component';
-import { lastValueFrom } from 'rxjs';
+import { Observable, lastValueFrom } from 'rxjs';
 import { AccountsLayout } from '../../../presentation/layouts/accounts/accounts.layout';
-import { AsyncPipe } from '@angular/common';
 import { IsFeatureEnabledUseCase } from '@common/domain/usecases/is-feature-enabled/is-feature-enabled.use-case';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ErrorComponent } from '@common/presentation/components/error/error.component';
+import { TranslatePipe } from '@common/presentation/pipes/translate/translate.pipe';
+import { HOST_LANGUAGE_TOKEN } from '@common/presentation/tokens/host-language-token/host-language.token';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SIGN_IN_IDENTIFIER_TRANSLATIONS } from './sign-in-identifier.translations';
 
 /**
  * @todo translation
@@ -19,11 +28,12 @@ import { ErrorComponent } from '@common/presentation/components/error/error.comp
   standalone: true,
   imports: [
     AccountsLayout,
-    InputComponent,
-    ErrorComponent,
     ButtonBasicComponent,
     ButtonFlatComponent,
-    AsyncPipe,
+    ErrorComponent,
+    InputComponent,
+    RouterLink,
+    TranslatePipe,
   ],
   providers: [
     {
@@ -36,6 +46,10 @@ import { ErrorComponent } from '@common/presentation/components/error/error.comp
   styleUrl: './sign-in-identifier.page.scss',
 })
 export class SignInIdentifierPage implements OnInit, AfterViewInit {
+  readonly translations = SIGN_IN_IDENTIFIER_TRANSLATIONS;
+
+  hostLanguage: string = '';
+
   isChallengePwdEnabled: boolean = false;
   isCreateAccountEnabled: boolean = false;
 
@@ -46,11 +60,16 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
   @ViewChild('inputEmail') inputEmail!: InputComponent;
 
   constructor(
-    private isFeatureEnabled: IsFeatureEnabledUseCase,
+    @Inject(HOST_LANGUAGE_TOKEN) public hostLanguage$: Observable<string>,
     private isEmailExists: IsEmailExistsUseCase,
-    private router: Router,
+    private isFeatureEnabled: IsFeatureEnabledUseCase,
     private route: ActivatedRoute,
-  ) {}
+    private router: Router,
+  ) {
+    this.hostLanguage$.pipe(takeUntilDestroyed()).subscribe((hostLanguage) => {
+      this.hostLanguage = hostLanguage;
+    });
+  }
 
   ngOnInit(): void {
     this.isFeatureEnabled
