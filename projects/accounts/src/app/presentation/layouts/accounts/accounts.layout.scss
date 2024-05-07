@@ -1,15 +1,17 @@
 :host {
   // Layout
   display: flex;
-  padding: calc(216/1024 * 100vh) calc(216/1440 * 100vw);
-  gap: 16px;
+  padding: calc(108 / 1024 * 100vh) calc(108 / 1440 * 100vw);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(16 / 1024 * 100vh);
 
   // fix: without setting the height, the background height is not 100% of the viewport
   height: 100vh;
   box-sizing: border-box;
 
   // Style
-  background: #F0F4F8;
+  background: #f0f4f8;
 
   @media screen and (max-width: 768px) {
     // Layout
@@ -17,7 +19,7 @@
     gap: 8px;
 
     // Style
-    background: #FFF;
+    background: #fff;
   }
 }
 
@@ -46,15 +48,15 @@
 .main {
   // Layout
   display: flex;
-  padding: calc(72/1024 * 100vh) calc(72/1440 * 100vw);
+  padding: calc(72 / 1024 * 100vh) calc(72 / 1440 * 100vw);
   flex-direction: column;
-  gap: 32px;
+  gap: calc(32 / 1024 * 100vh);
   flex: 1 0 0;
   align-self: stretch;
 
   // Style
   border-radius: 72px;
-  background: #FFF;
+  background: #fff;
 
   @media screen and (max-width: 768px) {
     // Layout
@@ -74,7 +76,7 @@
 .section {
   // Layout
   display: flex;
-  gap: calc(64/1440 * 100vw);
+  gap: calc(64 / 1440 * 100vw);
   flex: 1 0 0;
   align-self: stretch;
 
@@ -89,7 +91,7 @@
   // Layout
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: calc(32 / 1024 * 100vh);
   flex: 1 0 0;
   align-self: stretch;
 

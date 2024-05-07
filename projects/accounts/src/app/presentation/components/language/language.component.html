@@ -1,0 +1,23 @@
+<button
+  [matMenuTriggerFor]="menu"
+  #trigger="matMenuTrigger"
+  class="language"
+  [class.language-open]="trigger.menuOpen"
+>
+  <span>{{ selectedLanguage.value }}</span>
+  <mat-icon
+    [fontIcon]="trigger.menuOpen ? 'arrow_drop_up' : 'arrow_drop_down'"
+  />
+</button>
+
+<mat-menu #menu="matMenu" class="language-menu" hasBackdrop="false">
+  @for (item of languages | keyvalue; track $index) {
+    <button
+      class="button"
+      [class.button-checked]="selectedLanguage === item"
+      (click)="onSelectLanguage($event, item)"
+    >
+      {{ item.value }}
+    </button>
+  }
+</mat-menu>

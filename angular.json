@@ -460,6 +460,15 @@
             ]
           }
         }
+      },
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "id": {
+            "translation": "projects/accounts/src/locale/messages.id.xlf",
+            "baseHref": "id"
+          }
+        }
       }
     }
   },

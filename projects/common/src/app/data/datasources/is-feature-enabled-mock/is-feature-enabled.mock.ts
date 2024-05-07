@@ -102,6 +102,10 @@ const databaseMock: Map<string, IsFeatureEnabledMockModel> = new Map([
     '/v3/signin/challenge/pwd#onNext',
     { development: true, staging: false, production: false },
   ],
+  [
+    'accounts/layouts/accounts/language',
+    { development: true, staging: false, production: false },
+  ],
 ]);
 
 interface IsFeatureEnabledMockModel {
