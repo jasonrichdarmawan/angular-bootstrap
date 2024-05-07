@@ -3,7 +3,6 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { IsFeatureEnabledRepository } from '@common/domain/repositories/is-feature-enabled/is-feature-enabled.repository';
 import { IsFeatureEnabledMock } from '@common/data/datasources/is-feature-enabled-mock/is-feature-enabled.mock';
 import { IsFeatureEnabledUseCase } from '@common/domain/usecases/is-feature-enabled/is-feature-enabled.use-case';
 import { ENVIRONMENT_TOKEN } from 'projects/common/src/environments/environment.entity';
@@ -18,9 +17,8 @@ export const appConfig: ApplicationConfig = {
       useValue: environment,
     },
     {
-      provide: IsFeatureEnabledRepository,
+      provide: IsFeatureEnabledUseCase,
       useClass: IsFeatureEnabledMock,
     },
-    IsFeatureEnabledUseCase,
   ],
 };

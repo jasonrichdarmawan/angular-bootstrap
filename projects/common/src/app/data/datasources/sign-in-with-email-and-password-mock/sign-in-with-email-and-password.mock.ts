@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { SignInWithEmailAndPasswordResponse } from '@common/domain/entities/sign-in-with-email-and-password/sign-in-with-email-and-password.entity';
-import { SignInWithEmailAndPasswordRepository } from '@common/domain/repositories/sign-in-with-email-and-password/sign-in-with-email-and-password.repository';
 import { userDatabaseMock } from '../user-database-mock/user-database.mock';
 import { Observable, delay, of } from 'rxjs';
+import { SignInWithEmailAndPasswordUseCase } from '@common/domain/usecases/sign-in-with-email-and-password/sign-in-with-email-and-password.use-case';
 
 @Injectable()
 export class SignInWithEmailAndPasswordMock
-  implements SignInWithEmailAndPasswordRepository
+  implements SignInWithEmailAndPasswordUseCase
 {
   execute(
     email: string,

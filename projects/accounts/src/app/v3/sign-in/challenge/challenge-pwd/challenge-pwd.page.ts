@@ -11,7 +11,6 @@ import { IsFeatureEnabledUseCase } from '@common/domain/usecases/is-feature-enab
 import { ButtonFlatComponent } from '@common/presentation/components/button-flat/button-flat.component';
 import { ButtonBasicComponent } from '@common/presentation/components/button-basic/button-basic.component';
 import { SignInWithEmailAndPasswordUseCase } from '@common/domain/usecases/sign-in-with-email-and-password/sign-in-with-email-and-password.use-case';
-import { SignInWithEmailAndPasswordRepository } from '@common/domain/repositories/sign-in-with-email-and-password/sign-in-with-email-and-password.repository';
 import { SignInWithEmailAndPasswordMock } from '@common/data/datasources/sign-in-with-email-and-password-mock/sign-in-with-email-and-password.mock';
 import { lastValueFrom } from 'rxjs';
 
@@ -35,10 +34,9 @@ import { lastValueFrom } from 'rxjs';
   ],
   providers: [
     {
-      provide: SignInWithEmailAndPasswordRepository,
+      provide: SignInWithEmailAndPasswordUseCase,
       useClass: SignInWithEmailAndPasswordMock,
     },
-    SignInWithEmailAndPasswordUseCase,
   ],
   templateUrl: './challenge-pwd.page.html',
   styleUrl: './challenge-pwd.page.scss',
@@ -72,10 +70,22 @@ export class ChallengePwdPage implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.isFeatureEnabled
       .execute('/v3/signin/challenge/pwd#onTryAnotherWay')
-      .then((response) => (this.isOnTryAnotherWayEnabled = response));
+      .then((response) => {
+        if (!response.ok) {
+          this.isOnTryAnotherWayEnabled = false;
+          return;
+        }
+        this.isOnTryAnotherWayEnabled = response.data.isEnabled;
+      });
     this.isFeatureEnabled
       .execute('/v3/signin/challenge/pwd#onNext')
-      .then((response) => (this.isOnNextEnabled = response));
+      .then((response) => {
+        if (!response.ok) {
+          this.isOnNextEnabled = false;
+          return;
+        }
+        this.isOnNextEnabled = response.data.isEnabled;
+      });
   }
 
   ngAfterViewInit(): void {
