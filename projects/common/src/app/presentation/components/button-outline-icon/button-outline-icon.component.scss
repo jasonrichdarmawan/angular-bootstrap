@@ -10,17 +10,18 @@
   // Style
   border-radius: 16px;
   border: 1px solid #000;
-  background: #FFF;
+  background: #fff;
   cursor: pointer;
+  text-decoration: none;
 
   &:hover {
     // Style
-    background: #EDEDED;
+    background: #ededed;
   }
 
   &:active {
     // Style
-    background: #E8E8E8;
+    background: #e8e8e8;
   }
 }
 

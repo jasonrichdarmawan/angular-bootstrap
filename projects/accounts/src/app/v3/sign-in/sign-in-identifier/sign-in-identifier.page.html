@@ -1,6 +1,6 @@
 <acc-accounts
-  title="Sign In"
-  description="Use your Google Account"
+  [title]="hostLanguage | translate: translations['title']"
+  [description]="hostLanguage | translate: translations['description']"
   [showOverlay]="isLoading"
 >
   <div right-content-input class="input">
@@ -20,9 +20,11 @@
   </div>
 
   @if (isCreateAccountEnabled) {
-    <button com-basic right-content-action (click)="onCreateAccount()">
-      <span class="com-button">Create account</span>
-    </button>
+    <a com-basic right-content-action routerLink="/lifecycle/steps/signup">
+      <span class="com-button">{{
+        hostLanguage | translate: translations["Create account"]
+      }}</span>
+    </a>
   }
 
   @if (isChallengePwdEnabled) {
@@ -32,7 +34,9 @@
       (click)="onNext()"
       [disabled]="isLoading"
     >
-      <span class="com-button">Next</span>
+      <span class="com-button">{{
+        hostLanguage | translate: translations["Next"]
+      }}</span>
     </button>
   }
 </acc-accounts>
