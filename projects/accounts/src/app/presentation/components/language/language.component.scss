@@ -1,0 +1,76 @@
+.language {
+  // Layout
+  display: flex;
+  padding: 8px 16px;
+  align-items: center;
+  gap: 72px;
+
+  // Style
+  border-radius: 8px;
+  background: none;
+  border: 1px solid transparent;
+
+  &:hover {
+    // Style
+    background: #e2e7eb;
+    cursor: pointer;
+  }
+
+  &:active {
+    // Style
+    border: 1px solid #1170e7;
+    background: #dee2e6;
+  }
+
+  &-open {
+    // Style
+    border: 1px solid #1170e7;
+    background: #edf1f5;
+
+    &:hover {
+      // Style
+      background: #dfe4e8;
+    }
+  }
+}
+
+::ng-deep .language-menu {
+  .mat-mdc-menu-content {
+    // Layout
+    display: flex;
+    padding: 8px 0px;
+    flex-direction: column;
+
+    // Style
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.button {
+  // Layout
+  display: flex;
+  padding: 16px;
+  align-self: stretch;
+
+  // Style
+  background: #fff;
+  border: none;
+
+  &:hover {
+    // Style
+    background: #f5f5f5;
+    cursor: pointer;
+  }
+
+  &:active {
+    // Style
+    background: #d8d8d8;
+  }
+
+  &-checked {
+    // Style
+    background: #e7f0fe;
+  }
+}
