@@ -6,9 +6,7 @@ export type IsFeatureEnabledResponse =
   | { ok: false; errorCode: IsFeatureEnabledErrorCode };
 
 export interface IsFeatureEnabledData {
-  production: boolean;
-  staging: boolean;
-  development: boolean;
+  isEnabled: boolean;
 }
 
 export type IsFeatureEnabledErrorCode =

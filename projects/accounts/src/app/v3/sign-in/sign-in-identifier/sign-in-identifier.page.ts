@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { IsEmailExistsMock } from '@common/data/datasources/is-email-exists-mock/is-email-exists.mock';
-import { IsEmailExistsRepository } from '@common/domain/repositories/is-email-exists/is-email-exists.repository';
 import { IsEmailExistsUseCase } from '@common/domain/usecases/is-email-exists/is-email-exists.use-case';
 import { ButtonBasicComponent } from '@common/presentation/components/button-basic/button-basic.component';
 import { ButtonFlatComponent } from '@common/presentation/components/button-flat/button-flat.component';
@@ -28,11 +27,10 @@ import { ErrorComponent } from '@common/presentation/components/error/error.comp
   ],
   providers: [
     {
-      provide: IsEmailExistsRepository,
+      provide: IsEmailExistsUseCase,
       // @todo replace mock
       useClass: IsEmailExistsMock,
     },
-    IsEmailExistsUseCase,
   ],
   templateUrl: './sign-in-identifier.page.html',
   styleUrl: './sign-in-identifier.page.scss',
@@ -58,12 +56,20 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
     this.isFeatureEnabled
       .execute('/lifecycle/steps/signup/name')
       .then((response) => {
-        this.isCreateAccountEnabled = response;
+        if (!response.ok) {
+          this.isCreateAccountEnabled = false;
+          return;
+        }
+        this.isCreateAccountEnabled = response.data.isEnabled;
       });
     this.isFeatureEnabled
       .execute('/v3/signin/challenge/pwd')
       .then((response) => {
-        this.isChallengePwdEnabled = response;
+        if (!response.ok) {
+          this.isChallengePwdEnabled = false;
+          return;
+        }
+        this.isChallengePwdEnabled = response.data.isEnabled;
       });
   }
 
