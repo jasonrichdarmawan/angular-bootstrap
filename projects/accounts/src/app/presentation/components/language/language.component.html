@@ -14,7 +14,7 @@
   @for (item of languages | keyvalue; track $index) {
     <button
       class="button"
-      [class.button-checked]="selectedLanguage === item"
+      [class.button-checked]="selectedLanguage.key === item.key"
       (click)="onSelectLanguage($event, item)"
     >
       {{ item.value }}
