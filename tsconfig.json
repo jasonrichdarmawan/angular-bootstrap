@@ -23,7 +23,8 @@
     "baseUrl": "./",
     "paths": {
       "@common/*": ["projects/common/src/app/*"]
-    }
+    },
+    "resolveJsonModule": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

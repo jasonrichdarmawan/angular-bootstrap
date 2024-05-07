@@ -365,7 +365,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/accounts/src/favicon.ico",
-              "projects/accounts/src/assets"
+              "projects/accounts/src/assets",
+              "projects/accounts/src/locale"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",

@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   Inject,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -10,15 +11,15 @@ import { IsEmailExistsUseCase } from '@common/domain/usecases/is-email-exists/is
 import { ButtonBasicComponent } from '@common/presentation/components/button-basic/button-basic.component';
 import { ButtonFlatComponent } from '@common/presentation/components/button-flat/button-flat.component';
 import { InputComponent } from '@common/presentation/components/input/input.component';
-import { Observable, lastValueFrom } from 'rxjs';
+import { Observable, Subject, lastValueFrom, takeUntil } from 'rxjs';
 import { AccountsLayout } from '../../../presentation/layouts/accounts/accounts.layout';
 import { IsFeatureEnabledUseCase } from '@common/domain/usecases/is-feature-enabled/is-feature-enabled.use-case';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ErrorComponent } from '@common/presentation/components/error/error.component';
 import { TranslatePipe } from '@common/presentation/pipes/translate/translate.pipe';
-import { HOST_LANGUAGE_TOKEN } from '@common/presentation/tokens/host-language-token/host-language.token';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { SIGN_IN_IDENTIFIER_TRANSLATIONS } from './sign-in-identifier.translations';
+import { GetTranslationsUseCase } from '@common/domain/usecases/get-translations/get-translations.use-case';
+import { HOST_LANGUAGE_TOKEN } from '@common/presentation/tokens/host-language-token/host-language.token';
 
 /**
  * @todo translation
@@ -45,13 +46,10 @@ import { SIGN_IN_IDENTIFIER_TRANSLATIONS } from './sign-in-identifier.translatio
   templateUrl: './sign-in-identifier.page.html',
   styleUrl: './sign-in-identifier.page.scss',
 })
-export class SignInIdentifierPage implements OnInit, AfterViewInit {
-  readonly translations = SIGN_IN_IDENTIFIER_TRANSLATIONS;
-
-  hostLanguage: string = '';
-
+export class SignInIdentifierPage implements OnInit, AfterViewInit, OnDestroy {
   isChallengePwdEnabled: boolean = false;
   isCreateAccountEnabled: boolean = false;
+  isDestroyed$: Subject<void> = new Subject();
 
   email: string = '';
   errorMessage: string = '';
@@ -59,15 +57,28 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
 
   @ViewChild('inputEmail') inputEmail!: InputComponent;
 
+  translations: Record<string, string> = {};
+
   constructor(
-    @Inject(HOST_LANGUAGE_TOKEN) public hostLanguage$: Observable<string>,
+    @Inject(HOST_LANGUAGE_TOKEN) private hostLanguage$: Observable<string>,
+    private getTranslations: GetTranslationsUseCase,
     private isEmailExists: IsEmailExistsUseCase,
     private isFeatureEnabled: IsFeatureEnabledUseCase,
     private route: ActivatedRoute,
     private router: Router,
   ) {
     this.hostLanguage$.pipe(takeUntilDestroyed()).subscribe((hostLanguage) => {
-      this.hostLanguage = hostLanguage;
+      this.getTranslations
+        .execute(
+          '/locale/v3/sign-in/sign-in-identifier/sign-in-identifier',
+          hostLanguage,
+        )
+        .pipe(takeUntil(this.isDestroyed$))
+        .subscribe({
+          next: (translations) => {
+            this.translations = translations;
+          },
+        });
     });
   }
 
@@ -94,6 +105,11 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.inputEmail.nativeElement.focus();
+  }
+
+  ngOnDestroy(): void {
+    this.isDestroyed$.next();
+    this.isDestroyed$.complete();
   }
 
   async onCreateAccount() {

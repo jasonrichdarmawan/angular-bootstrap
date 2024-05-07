@@ -1,6 +1,6 @@
 <acc-accounts
-  [title]="hostLanguage | translate: translations['title']"
-  [description]="hostLanguage | translate: translations['description']"
+  [title]="'title' | translate: translations"
+  [description]="'description' | translate: translations"
   [showOverlay]="isLoading"
 >
   <div right-content-input class="input">
@@ -22,7 +22,7 @@
   @if (isCreateAccountEnabled) {
     <a com-basic right-content-action routerLink="/lifecycle/steps/signup">
       <span class="com-button">{{
-        hostLanguage | translate: translations["Create account"]
+        "Create account" | translate: translations
       }}</span>
     </a>
   }
@@ -34,9 +34,7 @@
       (click)="onNext()"
       [disabled]="isLoading"
     >
-      <span class="com-button">{{
-        hostLanguage | translate: translations["Next"]
-      }}</span>
+      <span class="com-button">{{ "Next" | translate: translations }}</span>
     </button>
   }
 </acc-accounts>
