@@ -11,10 +11,14 @@ import { HOST_LANGUAGE_TOKEN } from '@common/presentation/tokens/host-language-t
 import { HOST_LANGUAGE_PARAMETER_CONSTANT } from '@common/presentation/constants/host-language-parameter/host-language-parameter.constant';
 import { DEFAULT_LANGUAGE_CONSTANT } from './presentation/constants/default_language/language-default.constant';
 import { map } from 'rxjs';
+import { provideHttpClient } from '@angular/common/http';
+import { GetTranslationsUseCase } from '@common/domain/usecases/get-translations/get-translations.use-case';
+import { GettranslationsLocale } from '@common/data/datasources/get-translations-locale/get-translations.locale';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
+    provideHttpClient(),
     provideAnimationsAsync(),
     {
       provide: ENVIRONMENT_TOKEN,
@@ -40,6 +44,10 @@ export const appConfig: ApplicationConfig = {
         );
         return hl;
       },
+    },
+    {
+      provide: GetTranslationsUseCase,
+      useClass: GettranslationsLocale,
     },
   ],
 };

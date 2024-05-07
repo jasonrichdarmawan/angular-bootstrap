@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 
-export const HOST_LANGUAGE_TOKEN = new InjectionToken<Observable<string>>(
+export const HOST_LANGUAGE_TOKEN = new InjectionToken<Subject<string>>(
   'HOST_LANGUAGE_TOKEN',
 );
