@@ -1,3 +1,7 @@
+# What it's look like
+
+![Language Component](./language-component.gif)
+
 # Note
 
 1. Angular is smart enough not to download the default language if the host language exists.
