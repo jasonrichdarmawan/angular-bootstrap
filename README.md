@@ -3,11 +3,11 @@
 1. Layout Feature
    ![Accounts Layout](./docs/accounts-layout.gif)
 
-2. Language Feature
-   ![Language Component](./docs/language-component.gif)
-
-3. Clean Architecture Overview
+2. Clean Architecture Overview
    ![Clean Architecture Overview](./docs/clean-architecture-overview.svg)
+
+3. Language Feature
+   ![Language Component](./docs/language-component.gif)
 
 # What is this repository for?
 

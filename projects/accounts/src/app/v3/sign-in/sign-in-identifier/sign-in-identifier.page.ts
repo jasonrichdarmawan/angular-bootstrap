@@ -52,7 +52,7 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
   isCreateAccountEnabled: boolean = false;
 
   email: string = '';
-  errorMessage: string = '';
+  errorCode: string = '';
   isLoading: boolean = false;
 
   @ViewChild('inputEmail') inputEmail!: InputComponent;
@@ -108,10 +108,10 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
   }
 
   async onNext() {
-    this.errorMessage = '';
+    this.errorCode = '';
 
     if (!this.email) {
-      this.errorMessage = 'enter_an_email';
+      this.errorCode = 'enter_an_email';
       this.inputEmail.nativeElement.focus();
       return;
     }
@@ -125,13 +125,13 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
     if (!response.ok) {
       switch (response.errorCode) {
         case 'email-not-found':
-          this.errorMessage = 'email-not-found';
+          this.errorCode = 'email-not-found';
           break;
         default:
           console.warn(
             `${SignInIdentifierPage.name} error code: ${response.errorCode}`,
           );
-          this.errorMessage = 'unexpected_error';
+          this.errorCode = 'unexpected_error';
           break;
       }
       this.inputEmail.nativeElement.focus();
