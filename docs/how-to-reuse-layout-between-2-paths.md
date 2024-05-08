@@ -1,3 +1,7 @@
+# What it's look like
+
+![Accounts Layout](./accounts-layout.gif)
+
 # Condition
 
 There are 2 paths which use the same layout.

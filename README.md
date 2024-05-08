@@ -1,3 +1,11 @@
+# What it's look like?
+
+1. Layout Feature
+   ![Accounts Layout](./docs/accounts-layout.gif)
+
+2. Language Feature
+   ![Language Component](./docs/language-component.gif)
+
 # What is this repository for?
 
 An example of how to share session between domain and subdomain. For example,

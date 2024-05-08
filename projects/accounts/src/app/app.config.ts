@@ -32,7 +32,7 @@ export const appConfig: ApplicationConfig = {
       provide: HOST_LANGUAGE_TOKEN,
       useFactory: () => {
         const route = inject(ActivatedRoute);
-        const hl = route.queryParamMap.pipe(
+        const hl$ = route.queryParamMap.pipe(
           map((queryParamMap) => {
             const hl = queryParamMap.get(HOST_LANGUAGE_PARAMETER_CONSTANT);
             if (!hl) {
@@ -42,7 +42,7 @@ export const appConfig: ApplicationConfig = {
             return hl;
           }),
         );
-        return hl;
+        return hl$;
       },
     },
     {
