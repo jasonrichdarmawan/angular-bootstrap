@@ -1,5 +1,12 @@
-import { Location, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AccountsLayout } from 'projects/accounts/src/app/presentation/layouts/accounts/accounts.layout';
 import { MatIcon } from '@angular/material/icon';
@@ -12,7 +19,9 @@ import { ButtonFlatComponent } from '@common/presentation/components/button-flat
 import { ButtonBasicComponent } from '@common/presentation/components/button-basic/button-basic.component';
 import { SignInWithEmailAndPasswordUseCase } from '@common/domain/usecases/sign-in-with-email-and-password/sign-in-with-email-and-password.use-case';
 import { SignInWithEmailAndPasswordMock } from '@common/data/datasources/sign-in-with-email-and-password-mock/sign-in-with-email-and-password.mock';
-import { first, lastValueFrom } from 'rxjs';
+import { Observable, first, lastValueFrom, map } from 'rxjs';
+import { EMAIl_TOKEN } from './tokens/email.token';
+import { EMAIL_PARAMETER_CONSTANT } from './constants/email-parameter.constant';
 
 /**
  * @todo show error if email is empty
@@ -34,6 +43,24 @@ import { first, lastValueFrom } from 'rxjs';
   ],
   providers: [
     {
+      provide: EMAIl_TOKEN,
+      useFactory: () => {
+        const route = inject(ActivatedRoute);
+        const email$ = route.queryParamMap.pipe(
+          first(),
+          map((queryParamMap) => {
+            const email = queryParamMap.get(EMAIL_PARAMETER_CONSTANT);
+            if (!email) {
+              return '';
+            }
+
+            return email;
+          }),
+        );
+        return email$;
+      },
+    },
+    {
       provide: SignInWithEmailAndPasswordUseCase,
       useClass: SignInWithEmailAndPasswordMock,
     },
@@ -53,21 +80,22 @@ export class ChallengePwdPage implements OnInit, AfterViewInit {
   @ViewChild('inputPassword') inputPassword!: InputComponent;
 
   constructor(
+    @Inject(EMAIl_TOKEN) private email$: Observable<string>,
     private isFeatureEnabled: IsFeatureEnabledUseCase,
-    private location: Location,
-    private route: ActivatedRoute,
     private router: Router,
     private signIn: SignInWithEmailAndPasswordUseCase,
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParamMap.pipe(first()).subscribe((queryParamMap) => {
-      const email = queryParamMap.get('email');
+    this.email$.pipe(first()).subscribe((email) => {
+      this.email = email;
       if (!email) {
-        this.location.back();
+        this.router.navigate(['/v3/signin/identifier'], {
+          queryParamsHandling: 'preserve',
+          replaceUrl: true,
+        });
         return;
       }
-      this.email = email;
     });
     this.isFeatureEnabled
       .execute('/v3/signin/challenge/pwd#onTryAnotherWay')

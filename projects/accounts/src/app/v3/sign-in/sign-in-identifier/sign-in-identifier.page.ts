@@ -20,6 +20,7 @@ import { GetTranslationsUseCase } from '@common/domain/usecases/get-translations
 import { HOST_LANGUAGE_TOKEN } from '@common/presentation/tokens/host-language-token/host-language.token';
 import { DEFAULT_LANGUAGE_CONSTANT } from '../../../presentation/constants/default_language/language-default.constant';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EMAIL_PARAMETER_CONSTANT } from '../challenge/challenge-pwd/constants/email-parameter.constant';
 
 /**
  * @todo translation
@@ -138,7 +139,7 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
     }
 
     this.router.navigate(['/v3/signin/challenge/pwd'], {
-      queryParams: { email: this.email },
+      queryParams: { [EMAIL_PARAMETER_CONSTANT]: this.email },
       queryParamsHandling: 'merge',
     });
   }

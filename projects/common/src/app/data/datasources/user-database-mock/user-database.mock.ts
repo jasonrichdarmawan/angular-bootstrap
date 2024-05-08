@@ -5,4 +5,10 @@ export const userDatabaseMock: Map<string, { password: string }> = new Map([
       password: 'aB3$efgh',
     },
   ],
+  [
+    'b@gmail.com',
+    {
+      password: 'aB3$efgh',
+    },
+  ],
 ]);

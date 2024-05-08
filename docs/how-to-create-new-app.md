@@ -83,7 +83,46 @@ Run these commands:
 
    Note: make sure to add this to the `<app-name>.architect.test.options.assets` key as well.
 
-7. if the application use the `common` favicon.ico, add it to the application in the `angular.json` file
+7. add the environment config, the feature flag feature and the translate feature to the `app.config.ts` file.
+
+   ```
+    providers: [
+      {
+        provide: ENVIRONMENT_TOKEN,
+        useValue: environment,
+      },
+      {
+        provide: IsFeatureEnabledUseCase,
+        /** @todo replace mock */
+        useClass: IsFeatureEnabledMock,
+      },
+      {
+        provide: HOST_LANGUAGE_TOKEN,
+        useFactory: () => {
+          const route = inject(ActivatedRoute);
+          const hl = route.queryParamMap.pipe(
+            map((queryParamMap) => {
+              const hl = queryParamMap.get(HOST_LANGUAGE_PARAMETER_CONSTANT);
+              if (!hl) {
+                return DEFAULT_LANGUAGE_CONSTANT;
+              }
+
+              return hl;
+            }),
+          );
+          return hl;
+        },
+      },
+      {
+        provide: GetTranslationsUseCase,
+        useClass: GettranslationsLocale,
+      },
+    ],
+   ```
+
+# Optional
+
+1. if the application use the `common` favicon.ico, add it to the application in the `angular.json` file
 
    `<app-name>.architect.build.options.assets`
 
@@ -99,8 +138,8 @@ Run these commands:
 
    Note: make sure to add this to the `<app-name>.architect.test.options.assets` key as well.
 
-8. if the UI/UX use Angular Material, add Angular Material to the application with `npx ng add @angular/material --project <app-name>`
+2. if the UI/UX use Angular Material, add Angular Material to the application with `npx ng add @angular/material --project <app-name>`
 
-9. if it's SSR and will be deployed to Firebase Hosting.
+3. if it's SSR and will be deployed to Firebase Hosting.
 
    go to line 47 in `projects/poc/server.ts`. Then, remove the process.env['PORT'].
