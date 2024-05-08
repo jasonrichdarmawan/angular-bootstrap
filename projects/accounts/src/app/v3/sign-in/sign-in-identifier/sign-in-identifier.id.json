@@ -1,0 +1,9 @@
+{
+  "create_account": "Buat akun",
+  "description": "Gunakan Akun Google Anda",
+  "email_not_found": "Tidak dapat menemukan Akun Google Anda",
+  "enter_an_email": "Masukkan email",
+  "next": "Selanjutnya",
+  "title": "Login",
+  "unexpected_error": "Terjadi kesalahan tak terduga"
+}

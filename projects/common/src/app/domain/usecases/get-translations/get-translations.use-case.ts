@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 
 export abstract class GetTranslationsUseCase {
   abstract execute(
-    relativePath: string,
-    hostLanguage: string,
+    translations: () => Promise<object>,
+    defaultTranslations: () => Promise<object>,
   ): Observable<Record<string, string>>;
 }

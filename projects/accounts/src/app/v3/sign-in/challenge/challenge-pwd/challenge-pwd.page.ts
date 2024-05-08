@@ -1,6 +1,6 @@
 import { Location, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AccountsLayout } from 'projects/accounts/src/app/presentation/layouts/accounts/accounts.layout';
 import { MatIcon } from '@angular/material/icon';
 import { InputComponent } from '@common/presentation/components/input/input.component';
@@ -12,7 +12,7 @@ import { ButtonFlatComponent } from '@common/presentation/components/button-flat
 import { ButtonBasicComponent } from '@common/presentation/components/button-basic/button-basic.component';
 import { SignInWithEmailAndPasswordUseCase } from '@common/domain/usecases/sign-in-with-email-and-password/sign-in-with-email-and-password.use-case';
 import { SignInWithEmailAndPasswordMock } from '@common/data/datasources/sign-in-with-email-and-password-mock/sign-in-with-email-and-password.mock';
-import { lastValueFrom } from 'rxjs';
+import { first, lastValueFrom } from 'rxjs';
 
 /**
  * @todo show error if email is empty
@@ -22,15 +22,15 @@ import { lastValueFrom } from 'rxjs';
   standalone: true,
   imports: [
     AccountsLayout,
-    ButtonOutlineIconComponent,
-    NgTemplateOutlet,
-    MatIcon,
-    InputComponent,
-    ErrorComponent,
-    CheckboxComponent,
-    RouterLink,
     ButtonBasicComponent,
     ButtonFlatComponent,
+    ButtonOutlineIconComponent,
+    CheckboxComponent,
+    ErrorComponent,
+    InputComponent,
+    MatIcon,
+    NgTemplateOutlet,
+    RouterLink,
   ],
   providers: [
     {
@@ -42,8 +42,7 @@ import { lastValueFrom } from 'rxjs';
   styleUrl: './challenge-pwd.page.scss',
 })
 export class ChallengePwdPage implements OnInit, AfterViewInit {
-  readonly email: string = '';
-
+  email: string = '';
   errorMessage: string = '';
   isLoading: boolean = false;
   isOnNextEnabled: boolean = false;
@@ -54,20 +53,22 @@ export class ChallengePwdPage implements OnInit, AfterViewInit {
   @ViewChild('inputPassword') inputPassword!: InputComponent;
 
   constructor(
-    private router: Router,
-    private location: Location,
     private isFeatureEnabled: IsFeatureEnabledUseCase,
+    private location: Location,
+    private route: ActivatedRoute,
+    private router: Router,
     private signIn: SignInWithEmailAndPasswordUseCase,
-  ) {
-    const email = this.router.getCurrentNavigation()?.extras?.state?.['email'];
-    if (!email) {
-      this.location.back();
-      return;
-    }
-    this.email = email;
-  }
+  ) {}
 
   ngOnInit(): void {
+    this.route.queryParamMap.pipe(first()).subscribe((queryParamMap) => {
+      const email = queryParamMap.get('email');
+      if (!email) {
+        this.location.back();
+        return;
+      }
+      this.email = email;
+    });
     this.isFeatureEnabled
       .execute('/v3/signin/challenge/pwd#onTryAnotherWay')
       .then((response) => {
@@ -93,7 +94,10 @@ export class ChallengePwdPage implements OnInit, AfterViewInit {
   }
 
   async onEmail() {
-    this.location.back();
+    this.router.navigate(['/v3/signin/identifier'], {
+      queryParams: { email: undefined },
+      queryParamsHandling: 'merge',
+    });
   }
 
   async onNext() {

@@ -1,0 +1,9 @@
+{
+  "create_account": "Create account",
+  "description": "Use your Google Account",
+  "email_not_found": "Couldn't find your Google Account",
+  "enter_an_email": "Enter an email",
+  "next": "Next",
+  "title": "Sign In",
+  "unexpected_error": "Unexpected error"
+}

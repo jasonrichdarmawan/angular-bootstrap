@@ -22,7 +22,7 @@
   @if (isCreateAccountEnabled) {
     <a com-basic right-content-action routerLink="/lifecycle/steps/signup">
       <span class="com-button">{{
-        "Create account" | translate: translations
+        "create_account" | translate: translations
       }}</span>
     </a>
   }
@@ -34,7 +34,7 @@
       (click)="onNext()"
       [disabled]="isLoading"
     >
-      <span class="com-button">{{ "Next" | translate: translations }}</span>
+      <span class="com-button">{{ "next" | translate: translations }}</span>
     </button>
   }
 </acc-accounts>
