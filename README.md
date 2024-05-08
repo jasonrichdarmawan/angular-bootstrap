@@ -11,3 +11,4 @@ An example of how to share session between domain and subdomain. For example,
 - [Onboarding](./docs/onboarding.md)
 - [How to create new app](./docs/how-to-create-new-app.md)
 - [How to reuse layout between 2 paths](./docs/how-to-reuse-layout-between-2-paths.md)
+- [How to translate](./docs/how-to-translate.md)

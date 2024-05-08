@@ -15,7 +15,7 @@
       type="email"
     />
     @if (errorMessage) {
-      <com-error>{{ errorMessage }}</com-error>
+      <com-error>{{ errorMessage | translate: translations }}</com-error>
     }
   </div>
 
