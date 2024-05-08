@@ -10,12 +10,12 @@
       autocomplete="username"
       (input)="email = inputEmail.nativeElement.value"
       [value]="email"
-      [isError]="errorMessage ? true : false"
+      [isError]="errorCode ? true : false"
       placeholder="Email"
       type="email"
     />
-    @if (errorMessage) {
-      <com-error>{{ errorMessage | translate: translations }}</com-error>
+    @if (errorCode) {
+      <com-error>{{ errorCode | translate: translations }}</com-error>
     }
   </div>
 
