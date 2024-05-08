@@ -19,6 +19,7 @@ import { TranslatePipe } from '@common/presentation/pipes/translate/translate.pi
 import { GetTranslationsUseCase } from '@common/domain/usecases/get-translations/get-translations.use-case';
 import { HOST_LANGUAGE_TOKEN } from '@common/presentation/tokens/host-language-token/host-language.token';
 import { DEFAULT_LANGUAGE_CONSTANT } from '../../../presentation/constants/default_language/language-default.constant';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * @todo translation
@@ -63,10 +64,8 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
     private isEmailExists: IsEmailExistsUseCase,
     private isFeatureEnabled: IsFeatureEnabledUseCase,
     private router: Router,
-  ) {}
-
-  ngOnInit(): void {
-    this.hostLanguage$.subscribe((hostLanguage) => {
+  ) {
+    this.hostLanguage$.pipe(takeUntilDestroyed()).subscribe((hostLanguage) => {
       this.getTranslations
         .execute(
           () => import(`./sign-in-identifier.${hostLanguage}.json`),
@@ -80,6 +79,9 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
           },
         });
     });
+  }
+
+  ngOnInit(): void {
     this.isFeatureEnabled
       .execute('/lifecycle/steps/signup/name')
       .then((response) => {
@@ -108,7 +110,7 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
     this.errorMessage = '';
 
     if (!this.email) {
-      this.errorMessage = this.translations['enter_an_email'];
+      this.errorMessage = 'enter_an_email';
       this.inputEmail.nativeElement.focus();
       return;
     }
@@ -122,13 +124,13 @@ export class SignInIdentifierPage implements OnInit, AfterViewInit {
     if (!response.ok) {
       switch (response.errorCode) {
         case 'email-not-found':
-          this.errorMessage = this.translations['email-not-found'];
+          this.errorMessage = 'email-not-found';
           break;
         default:
           console.warn(
             `${SignInIdentifierPage.name} error code: ${response.errorCode}`,
           );
-          this.errorMessage = this.translations['unexpected_error'];
+          this.errorMessage = 'unexpected_error';
           break;
       }
       this.inputEmail.nativeElement.focus();

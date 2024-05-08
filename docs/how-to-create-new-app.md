@@ -59,12 +59,48 @@ Run these commands:
 
 5. add `common` styles to the application in the `angular.json` file
 
+   `<app-name>.architect.build.options.styles`
+
    ```
-   assets: ["projects/common/src/styles.scss"]
+   styles: ["projects/common/src/styles.scss"]
    ```
 
-6. add Angular Material to the application with `npx ng add @angular/material --project <app-name>`
+   Note: make sure to add this to the `<app-name>.architect.test.options.styles` key as well.
 
-7. if it's SSR and will be deployed to Firebase Hosting.
+6. add `common` assets to the application in the `angular.json` file
+
+   `<app-name>.architect.build.options.assets`
+
+   ```
+   assets: [
+    {
+      "glob": "**/*",
+      "input": "projects/common/src/assets",
+      "output": "assets"
+    },
+   ]
+   ```
+
+   Note: make sure to add this to the `<app-name>.architect.test.options.assets` key as well.
+
+7. if the application use the `common` favicon.ico, add it to the application in the `angular.json` file
+
+   `<app-name>.architect.build.options.assets`
+
+   ```
+   assets: [
+    {
+      "glob": "favicon.ico",
+      "input": "projects/common/src",
+      "output": "."
+    },
+   ]
+   ```
+
+   Note: make sure to add this to the `<app-name>.architect.test.options.assets` key as well.
+
+8. if the UI/UX use Angular Material, add Angular Material to the application with `npx ng add @angular/material --project <app-name>`
+
+9. if it's SSR and will be deployed to Firebase Hosting.
 
    go to line 47 in `projects/poc/server.ts`. Then, remove the process.env['PORT'].

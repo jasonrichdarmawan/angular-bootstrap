@@ -3,6 +3,61 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "common": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        }
+      },
+      "root": "projects/common",
+      "sourceRoot": "projects/common/src",
+      "prefix": "com",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "projects/common/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/common/src/favicon.ico",
+              "projects/common/src/assets"
+            ],
+            "styles": ["projects/common/src/styles.scss"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/common/**/*.ts",
+              "projects/common/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "poc": {
       "projectType": "application",
       "schematics": {
@@ -43,12 +98,12 @@
             "tsConfig": "projects/poc/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "projects/poc/src/favicon.ico",
               {
-                "glob": "*",
+                "glob": "**/*",
                 "input": "projects/common/src/assets",
                 "output": "assets"
               },
-              "projects/poc/src/favicon.ico",
               "projects/poc/src/assets"
             ],
             "styles": [
@@ -113,9 +168,17 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/poc/src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "projects/common/src/assets",
+                "output": "assets"
+              },
               "projects/poc/src/assets"
             ],
-            "styles": ["projects/poc/src/styles.scss"],
+            "styles": [
+              "projects/common/src/styles.scss",
+              "projects/poc/src/styles.scss"
+            ],
             "scripts": []
           }
         },
@@ -171,11 +234,15 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               {
-                "glob": "*",
+                "glob": "favicon.ico",
+                "input": "projects/common/src",
+                "output": "."
+              },
+              {
+                "glob": "**/*",
                 "input": "projects/common/src/assets",
                 "output": "assets"
               },
-              "projects/myaccount/src/favicon.ico",
               "projects/myaccount/src/assets"
             ],
             "styles": [
@@ -251,10 +318,22 @@
             "tsConfig": "projects/myaccount/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "projects/myaccount/src/favicon.ico",
+              {
+                "glob": "favicon.ico",
+                "input": "projects/common/src",
+                "output": "."
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/common/src/assets",
+                "output": "assets"
+              },
               "projects/myaccount/src/assets"
             ],
-            "styles": ["projects/myaccount/src/styles.scss"],
+            "styles": [
+              "projects/common/src/styles.scss",
+              "projects/myaccount/src/styles.scss"
+            ],
             "scripts": []
           }
         },
@@ -264,61 +343,6 @@
             "lintFilePatterns": [
               "projects/myaccount/**/*.ts",
               "projects/myaccount/**/*.html"
-            ]
-          }
-        }
-      }
-    },
-    "common": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss",
-          "skipTests": true
-        },
-        "@schematics/angular:service": {
-          "skipTests": true
-        },
-        "@schematics/angular:pipe": {
-          "skipTests": true
-        },
-        "@schematics/angular:directive": {
-          "skipTests": true
-        },
-        "@schematics/angular:guard": {
-          "skipTests": true
-        },
-        "@schematics/angular:class": {
-          "skipTests": true
-        },
-        "@schematics/angular:interceptor": {
-          "skipTests": true
-        }
-      },
-      "root": "projects/common",
-      "sourceRoot": "projects/common/src",
-      "prefix": "com",
-      "architect": {
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
-            "tsConfig": "projects/common/tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "projects/common/src/favicon.ico",
-              "projects/common/src/assets"
-            ],
-            "styles": ["projects/common/src/styles.scss"],
-            "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/common/**/*.ts",
-              "projects/common/**/*.html"
             ]
           }
         }
@@ -364,9 +388,17 @@
             "tsConfig": "projects/accounts/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "projects/accounts/src/favicon.ico",
-              "projects/accounts/src/assets",
-              "projects/accounts/src/locale"
+              {
+                "glob": "favicon.ico",
+                "input": "projects/common/src",
+                "output": "."
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/common/src/assets",
+                "output": "assets"
+              },
+              "projects/accounts/src/assets"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
@@ -442,11 +474,21 @@
             "tsConfig": "projects/accounts/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "projects/accounts/src/favicon.ico",
+              {
+                "glob": "favicon.ico",
+                "input": "projects/common/src",
+                "output": "."
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/common/src/assets",
+                "output": "assets"
+              },
               "projects/accounts/src/assets"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/common/src/styles.scss",
               "projects/accounts/src/styles.scss"
             ],
             "scripts": []
