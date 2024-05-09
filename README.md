@@ -24,3 +24,4 @@ An example of how to share session between domain and subdomain. For example,
 - [How to reuse layout between 2 paths](./docs/how-to-reuse-layout-between-2-paths.md)
 - [How to create an use case](./docs/how-to-create-an-use-case.md)
 - [How to translate](./docs/how-to-translate.md)
+- [How to create a feature flag](./docs/how-to-create-a-feature-flag.md)
