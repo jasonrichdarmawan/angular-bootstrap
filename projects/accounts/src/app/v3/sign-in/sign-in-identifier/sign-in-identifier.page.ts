@@ -5,22 +5,23 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { IsEmailExistsMock } from '@common/data/datasources/is-email-exists-mock/is-email-exists.mock';
-import { IsEmailExistsUseCase } from '@common/domain/usecases/is-email-exists/is-email-exists.use-case';
-import { ButtonBasicComponent } from '@common/presentation/components/button-basic/button-basic.component';
-import { ButtonFlatComponent } from '@common/presentation/components/button-flat/button-flat.component';
-import { InputComponent } from '@common/presentation/components/input/input.component';
+import { IsEmailExistsMock } from '@common/interface-adapters/data-sources/is-email-exists-mock/is-email-exists.mock';
+import { IsEmailExistsUseCase } from '@common/application-business-rules/usecases/is-email-exists/is-email-exists.use-case';
+import { ButtonBasicComponent } from '@common/interface-adapters/components/button-basic/button-basic.component';
+import { ButtonFlatComponent } from '@common/interface-adapters/components/button-flat/button-flat.component';
+import { InputComponent } from '@common/interface-adapters/components/input/input.component';
 import { Observable, first, lastValueFrom } from 'rxjs';
-import { AccountsLayout } from '../../../presentation/layouts/accounts/accounts.layout';
-import { IsFeatureEnabledUseCase } from '@common/domain/usecases/is-feature-enabled/is-feature-enabled.use-case';
+import { AccountsLayout } from '../../../interface-adapters/layouts/accounts/accounts.layout';
+import { IsFeatureEnabledUseCase } from '@common/application-business-rules/usecases/is-feature-enabled/is-feature-enabled.use-case';
 import { Router, RouterLink } from '@angular/router';
-import { ErrorComponent } from '@common/presentation/components/error/error.component';
-import { TranslatePipe } from '@common/presentation/pipes/translate/translate.pipe';
-import { GetTranslationsUseCase } from '@common/domain/usecases/get-translations/get-translations.use-case';
-import { HOST_LANGUAGE_TOKEN } from '@common/presentation/tokens/host-language-token/host-language.token';
-import { DEFAULT_LANGUAGE_CONSTANT } from '../../../presentation/constants/default_language/language-default.constant';
+import { ErrorComponent } from '@common/interface-adapters/components/error/error.component';
+import { TranslatePipe } from '@common/interface-adapters/pipes/translate/translate.pipe';
+import { GetTranslationsUseCase } from '@common/application-business-rules/usecases/get-translations/get-translations.use-case';
+import { HOST_LANGUAGE_TOKEN } from '@common/interface-adapters/tokens/host-language-token/host-language.token';
+import { DEFAULT_LANGUAGE_CONSTANT } from '../../../interface-adapters/constants/default_language/language-default.constant';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EMAIL_PARAMETER_CONSTANT } from '../challenge/challenge-pwd/constants/email-parameter.constant';
+import { IsEmailExistsDataSource } from '@common/application-business-rules/data-sources/is-email-exists/is-email-exists.data-source';
 
 /**
  * @todo translation
@@ -38,8 +39,9 @@ import { EMAIL_PARAMETER_CONSTANT } from '../challenge/challenge-pwd/constants/e
     TranslatePipe,
   ],
   providers: [
+    IsEmailExistsUseCase,
     {
-      provide: IsEmailExistsUseCase,
+      provide: IsEmailExistsDataSource,
       // @todo replace mock
       useClass: IsEmailExistsMock,
     },

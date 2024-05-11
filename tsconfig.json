@@ -22,7 +22,10 @@
     "lib": ["ES2022", "dom"],
     "baseUrl": "./",
     "paths": {
-      "@common/*": ["projects/common/src/app/*"]
+      "@common/*": ["projects/common/src/app/*"],
+      "@poc/*": ["projects/poc/src/app/*"],
+      "@accounts/*": ["projects/accounts/src/app/*"],
+      "@myaccount/*": ["projects/myaccount/src/app/*"]
     },
     "resolveJsonModule": true
   },
