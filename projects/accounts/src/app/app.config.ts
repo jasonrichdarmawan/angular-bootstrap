@@ -13,11 +13,11 @@ import { DEFAULT_LANGUAGE_CONSTANT } from './interface-adapters/constants/defaul
 import { map } from 'rxjs';
 import { provideHttpClient } from '@angular/common/http';
 import { GetTranslationsUseCase } from '@common/application-business-rules/usecases/get-translations/get-translations.use-case';
-import { GettranslationsLocale } from '@common/interface-adapters/data-sources/get-translations-locale/get-translations.locale';
 import { Mutex } from '@common/frameworks-and-drivers/mutex/mutex';
 import { MutexImplementation } from '@common/frameworks-and-drivers/mutex/mutex.implementation';
 import { GetTranslationsDataSource } from '@common/application-business-rules/data-sources/get-translations/get-translations.data-source';
 import { IsFeatureEnabledDataSource } from '@common/application-business-rules/data-sources/is-feature-enabled/is-feature-enabled.data-source';
+import { GetTranslationsLocale } from '@common/interface-adapters/data-sources/get-translations-locale/get-translations.locale';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -51,6 +51,6 @@ export const appConfig: ApplicationConfig = {
     { provide: IsFeatureEnabledDataSource, useClass: IsFeatureEnabledMock },
 
     GetTranslationsUseCase,
-    { provide: GetTranslationsDataSource, useClass: GettranslationsLocale },
+    { provide: GetTranslationsDataSource, useClass: GetTranslationsLocale },
   ],
 };

@@ -3,7 +3,7 @@ import { GetTranslationsDataSource } from '@common/application-business-rules/da
 import { Observable, catchError, defer, first } from 'rxjs';
 
 @Injectable()
-export class GettranslationsLocale implements GetTranslationsDataSource {
+export class GetTranslationsLocale implements GetTranslationsDataSource {
   /**
    * @todo component should not care about @Inject(HOST_LANGUAGE_TOKEN)
    */
