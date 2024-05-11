@@ -33,15 +33,11 @@ export class IsFeatureEnabledMock implements IsFeatureEnabledDataSource {
           };
         }
 
-        const element = response.get(feature)!;
+        const data = response.get(feature)!;
 
         return {
           ok: true,
-          data: {
-            development: element.development,
-            staging: element.staging,
-            production: element.production,
-          },
+          data: data,
         };
       }
 
@@ -54,15 +50,11 @@ export class IsFeatureEnabledMock implements IsFeatureEnabledDataSource {
         };
       }
 
-      const element = this.localCache.get(feature)!;
+      const data = this.localCache.get(feature)!;
 
       return {
         ok: true,
-        data: {
-          development: element.development,
-          staging: element.staging,
-          production: element.production,
-        },
+        data: data,
       };
     });
   }
