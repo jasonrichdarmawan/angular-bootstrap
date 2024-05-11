@@ -1,26 +1,17 @@
 import { Inject, Injectable } from '@angular/core';
 import { Mutex } from '@common/frameworks-and-drivers/mutex/mutex';
 import {
-  IsFeatureEnabledData,
-  IsFeatureEnabledResponse,
-} from '@common/entities/is-feature-enabled/is-feature-enabled.entity';
-import {
-  ENVIRONMENT_TOKEN,
-  Environment,
-  EnvironmentType,
-} from 'projects/common/src/environments/environment.entity';
-import { IsFeatureEnabledDataSource } from '@common/application-business-rules/data-sources/is-feature-enabled/is-feature-enabled.data-source';
+  IsFeatureEnabledDataSource,
+  IsFeatureEnabledModelResponse,
+} from '@common/application-business-rules/data-sources/is-feature-enabled/is-feature-enabled.data-source';
 
 @Injectable()
 export class IsFeatureEnabledMock implements IsFeatureEnabledDataSource {
   private localCache?: Map<string, IsFeatureEnabledMockModel>;
 
-  constructor(
-    @Inject(Mutex) private mutex: Mutex,
-    @Inject(ENVIRONMENT_TOKEN) private environment: Environment,
-  ) {}
+  constructor(@Inject(Mutex) private mutex: Mutex) {}
 
-  async execute(feature: string): Promise<IsFeatureEnabledResponse> {
+  async execute(feature: string): Promise<IsFeatureEnabledModelResponse> {
     return this.mutex.runExclusive(async () => {
       // fetch
       if (!this.localCache) {
@@ -43,11 +34,14 @@ export class IsFeatureEnabledMock implements IsFeatureEnabledDataSource {
         }
 
         const element = response.get(feature)!;
-        const data = isFeatureEnabledHelper(this.environment.type, element);
 
         return {
           ok: true,
-          data: data,
+          data: {
+            development: element.development,
+            staging: element.staging,
+            production: element.production,
+          },
         };
       }
 
@@ -62,29 +56,16 @@ export class IsFeatureEnabledMock implements IsFeatureEnabledDataSource {
 
       const element = this.localCache.get(feature)!;
 
-      const data = isFeatureEnabledHelper(this.environment.type, element);
-
-      return { ok: true, data: data };
+      return {
+        ok: true,
+        data: {
+          development: element.development,
+          staging: element.staging,
+          production: element.production,
+        },
+      };
     });
   }
-}
-
-function isFeatureEnabledHelper(
-  type: EnvironmentType,
-  input: IsFeatureEnabledMockModel,
-) {
-  const output: IsFeatureEnabledData = (() => {
-    switch (type) {
-      case 'development':
-        return { isEnabled: input.development ?? false };
-      case 'staging':
-        return { isEnabled: input.staging ?? false };
-      case 'production':
-        return { isEnabled: input.production ?? false };
-    }
-  })();
-
-  return output;
 }
 
 const databaseMock: Map<string, IsFeatureEnabledMockModel> = new Map([
