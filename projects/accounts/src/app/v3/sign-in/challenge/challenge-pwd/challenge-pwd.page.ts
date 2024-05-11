@@ -14,10 +14,10 @@ import { InputComponent } from '@common/interface-adapters/components/input/inpu
 import { ButtonOutlineIconComponent } from '@common/interface-adapters/components/button-outline-icon/button-outline-icon.component';
 import { CheckboxComponent } from '@common/interface-adapters/components/checkbox/checkbox.component';
 import { ErrorComponent } from '@common/interface-adapters/components/error/error.component';
-import { IsFeatureEnabledUseCase } from '@common/application-business-rules/usecases/is-feature-enabled/is-feature-enabled.use-case';
+import { IsFeatureEnabledUseCase } from '@common/application-business-rules/use-cases/is-feature-enabled/is-feature-enabled.use-case';
 import { ButtonFlatComponent } from '@common/interface-adapters/components/button-flat/button-flat.component';
 import { ButtonBasicComponent } from '@common/interface-adapters/components/button-basic/button-basic.component';
-import { SignInWithEmailAndPasswordUseCase } from '@common/application-business-rules/usecases/sign-in-with-email-and-password/sign-in-with-email-and-password.use-case';
+import { SignInWithEmailAndPasswordUseCase } from '@common/application-business-rules/use-cases/sign-in-with-email-and-password/sign-in-with-email-and-password.use-case';
 import { SignInWithEmailAndPasswordMock } from '@common/interface-adapters/data-sources/sign-in-with-email-and-password-mock/sign-in-with-email-and-password.mock';
 import { Observable, first, lastValueFrom, map } from 'rxjs';
 import { EMAIl_TOKEN } from './tokens/email.token';

@@ -4,7 +4,7 @@ import { ActivatedRoute, provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { IsFeatureEnabledMock } from '@common/interface-adapters/data-sources/is-feature-enabled-mock/is-feature-enabled.mock';
-import { IsFeatureEnabledUseCase } from '@common/application-business-rules/usecases/is-feature-enabled/is-feature-enabled.use-case';
+import { IsFeatureEnabledUseCase } from '@common/application-business-rules/use-cases/is-feature-enabled/is-feature-enabled.use-case';
 import { ENVIRONMENT_TOKEN } from 'projects/common/src/environments/environment.entity';
 import { environment } from 'projects/common/src/environments/environment';
 import { HOST_LANGUAGE_TOKEN } from '@common/interface-adapters/tokens/host-language-token/host-language.token';
@@ -12,7 +12,7 @@ import { HOST_LANGUAGE_PARAMETER_CONSTANT } from '@common/interface-adapters/con
 import { DEFAULT_LANGUAGE_CONSTANT } from './interface-adapters/constants/default_language/language-default.constant';
 import { map } from 'rxjs';
 import { provideHttpClient } from '@angular/common/http';
-import { GetTranslationsUseCase } from '@common/application-business-rules/usecases/get-translations/get-translations.use-case';
+import { GetTranslationsUseCase } from '@common/application-business-rules/use-cases/get-translations/get-translations.use-case';
 import { Mutex } from '@common/frameworks-and-drivers/mutex/mutex';
 import { MutexImplementation } from '@common/frameworks-and-drivers/mutex/mutex.implementation';
 import { GetTranslationsDataSource } from '@common/application-business-rules/data-sources/get-translations/get-translations.data-source';

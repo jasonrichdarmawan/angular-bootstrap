@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LanguageComponent } from '../../components/language/language.component';
-import { IsFeatureEnabledUseCase } from '@common/application-business-rules/usecases/is-feature-enabled/is-feature-enabled.use-case';
+import { IsFeatureEnabledUseCase } from '@common/application-business-rules/use-cases/is-feature-enabled/is-feature-enabled.use-case';
 
 /**
  * @todo support select="[left-content-action]"

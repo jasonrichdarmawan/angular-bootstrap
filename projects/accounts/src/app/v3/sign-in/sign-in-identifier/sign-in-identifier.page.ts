@@ -6,17 +6,17 @@ import {
   ViewChild,
 } from '@angular/core';
 import { IsEmailExistsMock } from '@common/interface-adapters/data-sources/is-email-exists-mock/is-email-exists.mock';
-import { IsEmailExistsUseCase } from '@common/application-business-rules/usecases/is-email-exists/is-email-exists.use-case';
+import { IsEmailExistsUseCase } from '@common/application-business-rules/use-cases/is-email-exists/is-email-exists.use-case';
 import { ButtonBasicComponent } from '@common/interface-adapters/components/button-basic/button-basic.component';
 import { ButtonFlatComponent } from '@common/interface-adapters/components/button-flat/button-flat.component';
 import { InputComponent } from '@common/interface-adapters/components/input/input.component';
 import { Observable, first, lastValueFrom } from 'rxjs';
 import { AccountsLayout } from '../../../interface-adapters/layouts/accounts/accounts.layout';
-import { IsFeatureEnabledUseCase } from '@common/application-business-rules/usecases/is-feature-enabled/is-feature-enabled.use-case';
+import { IsFeatureEnabledUseCase } from '@common/application-business-rules/use-cases/is-feature-enabled/is-feature-enabled.use-case';
 import { Router, RouterLink } from '@angular/router';
 import { ErrorComponent } from '@common/interface-adapters/components/error/error.component';
 import { TranslatePipe } from '@common/interface-adapters/pipes/translate/translate.pipe';
-import { GetTranslationsUseCase } from '@common/application-business-rules/usecases/get-translations/get-translations.use-case';
+import { GetTranslationsUseCase } from '@common/application-business-rules/use-cases/get-translations/get-translations.use-case';
 import { HOST_LANGUAGE_TOKEN } from '@common/interface-adapters/tokens/host-language-token/host-language.token';
 import { DEFAULT_LANGUAGE_CONSTANT } from '../../../interface-adapters/constants/default_language/language-default.constant';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
