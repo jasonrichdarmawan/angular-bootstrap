@@ -8,20 +8,21 @@ import {
   inject,
 } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { AccountsLayout } from 'projects/accounts/src/app/presentation/layouts/accounts/accounts.layout';
+import { AccountsLayout } from '@accounts/interface-adapters/layouts/accounts/accounts.layout';
 import { MatIcon } from '@angular/material/icon';
-import { InputComponent } from '@common/presentation/components/input/input.component';
-import { ButtonOutlineIconComponent } from '@common/presentation/components/button-outline-icon/button-outline-icon.component';
-import { CheckboxComponent } from '@common/presentation/components/checkbox/checkbox.component';
-import { ErrorComponent } from '@common/presentation/components/error/error.component';
-import { IsFeatureEnabledUseCase } from '@common/domain/usecases/is-feature-enabled/is-feature-enabled.use-case';
-import { ButtonFlatComponent } from '@common/presentation/components/button-flat/button-flat.component';
-import { ButtonBasicComponent } from '@common/presentation/components/button-basic/button-basic.component';
-import { SignInWithEmailAndPasswordUseCase } from '@common/domain/usecases/sign-in-with-email-and-password/sign-in-with-email-and-password.use-case';
-import { SignInWithEmailAndPasswordMock } from '@common/data/datasources/sign-in-with-email-and-password-mock/sign-in-with-email-and-password.mock';
+import { InputComponent } from '@common/interface-adapters/components/input/input.component';
+import { ButtonOutlineIconComponent } from '@common/interface-adapters/components/button-outline-icon/button-outline-icon.component';
+import { CheckboxComponent } from '@common/interface-adapters/components/checkbox/checkbox.component';
+import { ErrorComponent } from '@common/interface-adapters/components/error/error.component';
+import { IsFeatureEnabledUseCase } from '@common/application-business-rules/usecases/is-feature-enabled/is-feature-enabled.use-case';
+import { ButtonFlatComponent } from '@common/interface-adapters/components/button-flat/button-flat.component';
+import { ButtonBasicComponent } from '@common/interface-adapters/components/button-basic/button-basic.component';
+import { SignInWithEmailAndPasswordUseCase } from '@common/application-business-rules/usecases/sign-in-with-email-and-password/sign-in-with-email-and-password.use-case';
+import { SignInWithEmailAndPasswordMock } from '@common/interface-adapters/data-sources/sign-in-with-email-and-password-mock/sign-in-with-email-and-password.mock';
 import { Observable, first, lastValueFrom, map } from 'rxjs';
 import { EMAIl_TOKEN } from './tokens/email.token';
 import { EMAIL_PARAMETER_CONSTANT } from './constants/email-parameter.constant';
+import { SignInWithEmailAndPasswordDataSource } from '@common/application-business-rules/data-sources/sign-in/sign-in.data-source';
 
 /**
  * @todo show error if email is empty
@@ -60,8 +61,10 @@ import { EMAIL_PARAMETER_CONSTANT } from './constants/email-parameter.constant';
         return email$;
       },
     },
+
+    SignInWithEmailAndPasswordUseCase,
     {
-      provide: SignInWithEmailAndPasswordUseCase,
+      provide: SignInWithEmailAndPasswordDataSource,
       useClass: SignInWithEmailAndPasswordMock,
     },
   ],
